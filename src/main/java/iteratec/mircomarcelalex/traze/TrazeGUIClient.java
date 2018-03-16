@@ -81,8 +81,10 @@ public class TrazeGUIClient extends BasicGame {
     
     private Player findPlayerByBike(Bike b) {
     	for(Player p : TrazeClient.players) {
+    		if(b != null && p != null) {
     		if(b.getPlayerId() == p.getId()) {
     			return p;
+    		}
     		}
     	}
     	return null;
