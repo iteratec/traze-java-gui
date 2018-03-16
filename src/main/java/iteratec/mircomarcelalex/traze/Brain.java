@@ -6,7 +6,6 @@ public class Brain {
 
     static int xMax = 62;
     static int yMax = 62;
-    static String lastDirection;
 
     Brain(int xMax, int yMax) {
         Brain.xMax = xMax;
@@ -14,22 +13,21 @@ public class Brain {
     }
 
     static void calculateNextDirection(String wantedDirection, Coordination2D location) {
-        if (lastDirection == null) {
-            lastDirection = wantedDirection;
-        } else {
-            if (lastDirection.equals("N")) {
+        if (wantedDirection != null) {
+            System.out.println("last: " + TrazeClient.current_course + ", want: " + wantedDirection);
+            if (TrazeClient.current_course.equals("N")) {
                 if (wantedDirection.equals("S")) {
                     TrazeClient.current_course = "E";
                 }
-            } else if (lastDirection.equals("E")) {
+            } else if (TrazeClient.current_course.equals("E")) {
                 if (wantedDirection.equals("W")) {
                     TrazeClient.current_course = "N";
                 }
-            } else if (lastDirection.equals("S")) {
+            } else if (TrazeClient.current_course.equals("S")) {
                 if (wantedDirection.equals("N")) {
                     TrazeClient.current_course = "E";
                 }
-            } else if (lastDirection.equals("W")) {
+            } else if (TrazeClient.current_course.equals("W")) {
                 if (wantedDirection.equals("E")) {
                     TrazeClient.current_course = "N";
                 }
