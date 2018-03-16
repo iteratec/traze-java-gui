@@ -12,7 +12,7 @@ import org.json.JSONObject;
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 
-public class TrazeClient extends BasicGame { // test
+public class TrazeClient extends BasicGame {
 
     private static BrokerClient bc;
     private static Grid grid;
@@ -69,8 +69,6 @@ public class TrazeClient extends BasicGame { // test
                 tiles[x][y] = (int) ((JSONArray) tilesJsonArray.get(x)).get(y);
             }
         }
-
-        System.out.println("gridJson " + gridJson);
 
         JSONArray bikesJsonArray = (JSONArray) gridJson.get("bikes");
         Bike[] bikes = new Bike[bikesJsonArray.length()];
