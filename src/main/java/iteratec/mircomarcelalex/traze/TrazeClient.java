@@ -109,7 +109,6 @@ public class TrazeClient {
             BrokerClient.steer(messageString, topic);
 
             for (Bike bike : grid.getBikes()) {
-                System.out.println("bike.getPlayerId(): " + bike.getPlayerId());
                 if (bike.getPlayerId() == playerId) {
                     Brain.calculateNextDirection(current_course, bike.getCurrentLocation());
                 }
