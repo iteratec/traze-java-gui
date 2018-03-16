@@ -65,9 +65,27 @@ public class TrazeGUIClient extends BasicGame {
         		}
         		c = getColor(b.getPlayerId());
         		g.setColor(c);
+        		Player name = findPlayerByBike(b);
+        		String nameString = name.getName();
+        		if(name != null) {
+        		g.setColor(Color.white);
+        		if(findPlayerByBike(b).getName().length() >= 7) {
+        		nameString = findPlayerByBike(b).getName().substring(0, 8);
+        		}
+        		g.drawString(nameStringd, b.getCurrentLocation().getX() * GRID_GRAPHIC_WIDTH , WINDOW_HEIGHT - b.getCurrentLocation().getY() * GRID_GRAPHIC_HEIGHT);
+        		}
         		g.fill(new Rectangle(b.getCurrentLocation().getX() * GRID_GRAPHIC_WIDTH , WINDOW_HEIGHT - b.getCurrentLocation().getY() * GRID_GRAPHIC_HEIGHT, 13f, 10f));
         	}
         }
+    }
+    
+    private Player findPlayerByBike(Bike b) {
+    	for(Player p : TrazeClient.players) {
+    		if(b.getPlayerId() == p.getId()) {
+    			return p;
+    		}
+    	}
+    	return null;
     }
 
     @Override
@@ -78,9 +96,11 @@ public class TrazeGUIClient extends BasicGame {
     
     public Color getColor(int playerId) {
     	for(Player p : TrazeClient.players) {
+    		if(p != null) {
 			if(playerId == p.getId()) {
 				return (hex2Rgb(p.getColor()));
 			}
+    		}
 		}
 		return Color.red;
     }
