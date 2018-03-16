@@ -3,6 +3,10 @@ package iteratec.mircomarcelalex.traze;
 import iteratec.mircomarcelalex.traze.content.Bike;
 import iteratec.mircomarcelalex.traze.content.Coordination2D;
 import iteratec.mircomarcelalex.traze.content.Grid;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.newdawn.slick.*;
@@ -12,32 +16,30 @@ public class TrazeClient extends BasicGame {
 
     private static BrokerClient bc;
     private static Grid grid;
+    private static AppGameContainer appgc;
 
     public TrazeClient(String title) {
         super(title);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SlickException {
         bc = new BrokerClient();
+        
+       appgc = new AppGameContainer(new TrazeClient("MMA Traze Client"));
+       appgc.setDisplayMode(800, 600, false);
+       appgc.start();
 
-//        try {
-//            AppGameContainer appgc;
-//            appgc = new AppGameContainer(new TrazeClient("MMA Traze Client"));
-//            appgc.setDisplayMode(800, 600, false);
-//            appgc.start();
-//
-//        } catch (SlickException ex) {
-//            Logger.getLogger(TrazeClient.class.getName()).log(Level.SEVERE, null, ex);
-//        }
     }
 
     public void render(GameContainer container, Graphics g) throws SlickException {
+    	if(grid != null) {
         for (int x = 0; x < grid.getGridWidth(); x++) {
             for (int y = 0; y < grid.getGridHeight(); y++) {
                 g.setColor(Color.green);
                 g.draw(new Rectangle(x, y, 800 / grid.getGridWidth(), 600 / grid.getGridWidth()));
             }
         }
+    	}
     }
 
     @Override
