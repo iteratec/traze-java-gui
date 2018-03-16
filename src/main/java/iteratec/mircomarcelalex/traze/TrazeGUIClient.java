@@ -24,11 +24,13 @@ public class TrazeGUIClient extends BasicGame {
 
 	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
+		if(TrazeClient.grid != null) {
 		for(int x = 0; x < TrazeClient.grid.getGridWidth(); x++) {
 			for(int y = 0; y < TrazeClient.grid.getGridHeight(); y++) {
 				g.setColor(Color.green);
 				g.draw(new Rectangle(x, y, 32, 32));
 			}
+		}
 		}
 	}
 
