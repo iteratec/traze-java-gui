@@ -11,6 +11,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.*;
+import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Rectangle;
 
 import iteratec.mircomarcelalex.traze.content.Bike;
@@ -56,11 +57,14 @@ public class TrazeGUIClient extends BasicGame {
         
      	if(TrazeClient.grid != null && TrazeClient.players != null && TrazeClient.grid.getBikes() != null) { 
         	for(Bike b : TrazeClient.grid.getBikes()) {
-        		g.setColor(getColor(b.getPlayerId()));
-        		for(Coordination2D c : b.getTrail()) {
-        			g.fill(new Rectangle(c.getX() * GRID_GRAPHIC_WIDTH, WINDOW_HEIGHT - c.getY() * GRID_GRAPHIC_HEIGHT, 13f, 10f));
+        		Color c = getColor(b.getPlayerId());
+        		c.a = 0.7f;
+        		g.setColor(c);
+        		for(Coordination2D cord : b.getTrail()) {
+        			g.fill(new Rectangle(cord.getX() * GRID_GRAPHIC_WIDTH, WINDOW_HEIGHT - cord.getY() * GRID_GRAPHIC_HEIGHT, 13f, 10f));
         		}
-        		g.setColor(getColor(b.getPlayerId()));
+        		c = getColor(b.getPlayerId());
+        		g.setColor(c);
         		g.fill(new Rectangle(b.getCurrentLocation().getX() * GRID_GRAPHIC_WIDTH , WINDOW_HEIGHT - b.getCurrentLocation().getY() * GRID_GRAPHIC_HEIGHT, 13f, 10f));
         	}
         }
@@ -85,7 +89,8 @@ public class TrazeGUIClient extends BasicGame {
         return new Color(
                 Integer.valueOf( colorStr.substring( 1, 3 ), 16 ),
                 Integer.valueOf( colorStr.substring( 3, 5 ), 16 ),
-                Integer.valueOf( colorStr.substring( 5, 7 ), 16 ) );
+                Integer.valueOf( colorStr.substring( 5, 7 ), 16 )
+        		);
     }
 
     @Override
