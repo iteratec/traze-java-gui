@@ -6,10 +6,13 @@ import iteratec.mircomarcelalex.traze.content.Grid;
 import iteratec.mircomarcelalex.traze.content.Player;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.newdawn.slick.*;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 
-public class TrazeClient{
+public class TrazeClient {
 
     private static BrokerClient bc;
     public static Grid grid;
@@ -76,10 +79,12 @@ public class TrazeClient{
         }
 
         JSONArray spawnJsonArray = (JSONArray) gridJson.get("spawns");
+        System.out.println("spawnJsonArray: " + spawnJsonArray);
         Coordination2D[] spawns = new Coordination2D[spawnJsonArray.length()];
 
         for (int k = 0; k < spawnJsonArray.length(); ++k) {
-            spawns[k] = new Coordination2D((int) spawnJsonArray.get(0), (int) spawnJsonArray.get(1));
+            JSONArray currentArray = (JSONArray) spawnJsonArray.get(k);
+            spawns[k] = new Coordination2D((int) (currentArray.get(0)), (int) (currentArray.get(1)));
         }
 
         grid = new Grid(tiles, bikes, spawns);
@@ -87,7 +92,6 @@ public class TrazeClient{
 
     public static void setPlayers(String playersString) {
         JSONArray playersJsonArray = new JSONArray(playersString);
-        System.out.println(playersJsonArray);
 
         for (int i = 0; i < playersJsonArray.length(); ++i) {
             JSONObject playerJson = (JSONObject) playersJsonArray.get(i);
@@ -96,10 +100,10 @@ public class TrazeClient{
             player.setName((String) playerJson.get("name"));
             player.setColor((String) playerJson.get("color"));
             player.setFrags((int) playerJson.get("frags"));
-            player.setColor((String) playerJson.get("owned"));
+            player.setOwned((int) playerJson.get("owned"));
             players[i] = player;
         }
     }
-    
-    
+
+
 }
