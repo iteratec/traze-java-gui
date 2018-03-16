@@ -6,9 +6,11 @@ import iteratec.mircomarcelalex.traze.content.Grid;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.newdawn.slick.BasicGame;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Rectangle;
 
 public class TrazeClient extends BasicGame {
 
@@ -34,8 +36,12 @@ public class TrazeClient extends BasicGame {
     }
 
     public void render(GameContainer container, Graphics g) throws SlickException {
-
-
+    	for(int x = 0; x < grid.getGridWidth(); x++) {
+    		for(int y = 0; y < grid.getGridHeight(); y++) {
+        		g.setColor(Color.green);
+        		g.draw(new Rectangle(x, y, 800/grid.getGridWidth(), 600/grid.getGridWidth()));
+        	}
+    	}
     }
 
     @Override
