@@ -5,10 +5,10 @@ public class Grid {
 	private int gridWidth;
 	private int gridHeight;
 	private int[][] map;
-	private Bikes[] bikes;
+	private Bike[] bikes;
 	private Coordination2D[] spawns;
 	
-	public Grid(int width, int height, int[][] map, Bikes[] bikes, Coordination2D[] spawns) {
+	public Grid(int width, int height, int[][] map, Bike[] bikes, Coordination2D[] spawns) {
 		this.gridWidth = width;
 		this.gridHeight = height;
 		this.map = map;
@@ -40,11 +40,11 @@ public class Grid {
 		this.map = map;
 	}
 
-	public Bikes[] getBikes() {
+	public Bike[] getBikes() {
 		return bikes;
 	}
 
-	public void setBikes(Bikes[] bikes) {
+	public void setBikes(Bike[] bikes) {
 		this.bikes = bikes;
 	}
 
