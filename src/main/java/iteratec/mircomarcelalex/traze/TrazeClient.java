@@ -3,10 +3,6 @@ package iteratec.mircomarcelalex.traze;
 import iteratec.mircomarcelalex.traze.content.Bike;
 import iteratec.mircomarcelalex.traze.content.Coordination2D;
 import iteratec.mircomarcelalex.traze.content.Grid;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.newdawn.slick.*;
