@@ -20,6 +20,8 @@ import iteratec.mircomarcelalex.traze.content.Player;
 public class TrazeGUIClient extends BasicGame {
 
 	private static AppGameContainer appgc;
+	private static final int WINDOW_WIDTH = 806;
+	private static final int WINDOW_HEIGHT = 620;
 	private static final float GRID_GRAPHIC_WIDTH = 13f;
 	private static final float GRID_GRAPHIC_HEIGHT = 10f;
 	private static final Color GRID_COLOR = new Color(176,65,167,0.1f);
@@ -30,7 +32,7 @@ public class TrazeGUIClient extends BasicGame {
 	
     public static void startClient() throws SlickException {
         appgc = new AppGameContainer(new TrazeGUIClient("MMA Traze Client"));
-        appgc.setDisplayMode(806, 620, false);
+        appgc.setDisplayMode(WINDOW_WIDTH, WINDOW_HEIGHT, false);
         appgc.start();
         Logger.getLogger(TrazeGUIClient.class.getName()).setLevel(Level.OFF);
     }
@@ -41,7 +43,7 @@ public class TrazeGUIClient extends BasicGame {
             for (int x = 0; x < TrazeClient.grid.getGridWidth(); x++) {
                 for (int y = 0; y < TrazeClient.grid.getGridHeight(); y++) {
                     g.setColor(GRID_COLOR);
-                    g.draw(new Rectangle(x * GRID_GRAPHIC_WIDTH, 620 - y * GRID_GRAPHIC_HEIGHT, GRID_GRAPHIC_WIDTH, GRID_GRAPHIC_HEIGHT));
+                    g.draw(new Rectangle(x * GRID_GRAPHIC_WIDTH, WINDOW_HEIGHT - y * GRID_GRAPHIC_HEIGHT, GRID_GRAPHIC_WIDTH, GRID_GRAPHIC_HEIGHT));
                 }
             }
         }
@@ -50,10 +52,10 @@ public class TrazeGUIClient extends BasicGame {
         	for(Bike b : TrazeClient.grid.getBikes()) {
         		g.setColor(getColor(b.getPlayerId()));
         		for(Coordination2D c : b.getTrail()) {
-        			g.fill(new Rectangle(c.getX() * GRID_GRAPHIC_WIDTH, 620 - c.getY() * GRID_GRAPHIC_HEIGHT, 13f, 10f));
+        			g.fill(new Rectangle(c.getX() * GRID_GRAPHIC_WIDTH, WINDOW_HEIGHT - c.getY() * GRID_GRAPHIC_HEIGHT, 13f, 10f));
         		}
         		g.setColor(getColor(b.getPlayerId()));
-        		g.fill(new Rectangle(b.getCurrentLocation().getX() * GRID_GRAPHIC_WIDTH , 620 - b.getCurrentLocation().getY() * GRID_GRAPHIC_HEIGHT, 13f, 10f));
+        		g.fill(new Rectangle(b.getCurrentLocation().getX() * GRID_GRAPHIC_WIDTH , WINDOW_HEIGHT - b.getCurrentLocation().getY() * GRID_GRAPHIC_HEIGHT, 13f, 10f));
         	}
         }
     }
