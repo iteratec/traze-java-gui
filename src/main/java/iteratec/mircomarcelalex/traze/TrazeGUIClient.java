@@ -123,13 +123,13 @@ public class TrazeGUIClient extends BasicGame {
             System.out.println("Pressed W");
             wantedCourse = "N";
         }
-
-        for (Bike bike : TrazeClient.grid.getBikes()) {
-            if (bike.getPlayerId() == TrazeClient.playerId) {
-                Brain.calculateNextDirection(wantedCourse, bike.getCurrentLocation());
-                break;
-            }
-        }
+            TrazeClient.current_course = wantedCourse;
+//        for (Bike bike : TrazeClient.grid.getBikes()) {
+//            if (bike.getPlayerId() == TrazeClient.playerId) {
+//                Brain.calculateNextDirection(wantedCourse, bike.getCurrentLocation());
+//                break;
+//            }
+//        }
 
     }
 
