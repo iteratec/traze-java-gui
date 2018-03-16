@@ -2,9 +2,6 @@ package iteratec.mircomarcelalex.traze;
 
 import org.newdawn.slick.*;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 public class TrazeClient extends BasicGame {
 
     public TrazeClient(String title) {
