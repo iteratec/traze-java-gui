@@ -1,4 +1,4 @@
-package iteratec.mircomarcelalex.traze;
+package iteratec.mircomarcelalex.traze.content;
 
 public class Player {
 
