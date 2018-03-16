@@ -10,8 +10,9 @@ public class SimpleMqttCallBack implements MqttCallback {
         System.out.println("Connection to MQTT broker lost!");
     }
 
-    public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
-        System.out.println("Message received:\n\t"+ new String(mqttMessage.getPayload()) );
+    public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
+        System.out.println("Message received:\n\t" + new String(mqttMessage.getPayload()));
+        System.out.println("topic: " + topic);
     }
 
     public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
