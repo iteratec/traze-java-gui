@@ -12,6 +12,8 @@ public class Grid {
 		this.map = map;
 		this.bikes = bikes;
 		this.spawns = spawns;
+		this.gridWidth = map[0].length;
+		this.gridHeight = map[1].length;
 	}
 
 	public int getGridWidth() {

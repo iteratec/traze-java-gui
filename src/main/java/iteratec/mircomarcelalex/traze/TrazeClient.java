@@ -6,11 +6,7 @@ import iteratec.mircomarcelalex.traze.content.Grid;
 import iteratec.mircomarcelalex.traze.content.Player;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Rectangle;
 
 public class TrazeClient {
 
@@ -18,8 +14,9 @@ public class TrazeClient {
     public static Grid grid;
     public static Player[] players;
 
-    public static void main(String[] args) throws SlickException {
+    public static void main(String[] args) throws SlickException{
         bc = new BrokerClient();
+        TrazeGUIClient.startClient();
     }
 
     public static void setGrid(String gridString) {
