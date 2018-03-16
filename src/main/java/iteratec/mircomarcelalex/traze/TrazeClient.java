@@ -9,24 +9,14 @@ import org.json.JSONObject;
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 
-public class TrazeClient extends BasicGame {
+public class TrazeClient{
 
     private static BrokerClient bc;
-    private static Grid grid;
-    private static Player[] players;
-    private static AppGameContainer appgc;
-
-    public TrazeClient(String title) {
-        super(title);
-    }
+    public static Grid grid;
+    public static Player[] players;
 
     public static void main(String[] args) throws SlickException {
         bc = new BrokerClient();
-
-//        appgc = new AppGameContainer(new TrazeClient("MMA Traze Client"));
-//        appgc.setDisplayMode(800, 600, false);
-//        appgc.start();
-
     }
 
     public void render(GameContainer container, Graphics g) throws SlickException {
@@ -38,17 +28,6 @@ public class TrazeClient extends BasicGame {
                 }
             }
         }
-    }
-
-    @Override
-    public void init(GameContainer container) throws SlickException {
-
-    }
-
-    @Override
-    public void update(GameContainer container, int delta) throws SlickException {
-        // TODO Auto-generated method stub
-
     }
 
     public static void setGrid(String gridString) {
@@ -121,4 +100,6 @@ public class TrazeClient extends BasicGame {
             players[i] = player;
         }
     }
+    
+    
 }
