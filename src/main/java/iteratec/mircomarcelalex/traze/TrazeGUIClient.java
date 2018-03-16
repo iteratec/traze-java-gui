@@ -1,5 +1,8 @@
 package iteratec.mircomarcelalex.traze;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
@@ -24,6 +27,7 @@ public class TrazeGUIClient extends BasicGame {
       appgc = new AppGameContainer(new TrazeGUIClient("MMA Traze Client"));
       appgc.setDisplayMode(806, 620, false);
       appgc.start();
+      Logger.getLogger(AppGameContainer.class.getName()).setLevel(Level.OFF);
 	}
 
 	@Override
