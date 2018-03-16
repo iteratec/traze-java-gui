@@ -9,7 +9,7 @@ class BrokerClient {
     BrokerClient() {
         MqttClient client = null;
         try {
-            client = new MqttClient("tcp://localhost:1883", MqttClient.generateClientId());
+            client = new MqttClient("traze.iteratec.de:1883", MqttClient.generateClientId());
             client.connect();
             MqttMessage message = new MqttMessage();
             message.setPayload("Hello world from Java".getBytes());

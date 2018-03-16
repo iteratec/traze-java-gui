@@ -19,7 +19,7 @@ public class TrazeClient extends BasicGame {
             appgc.start();
 
         } catch (SlickException ex) {
-            Logger.getLogger(TrazeClient.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(TrazeClient.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
