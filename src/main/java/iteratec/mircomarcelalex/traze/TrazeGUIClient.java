@@ -5,6 +5,7 @@ import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 
@@ -27,7 +28,6 @@ public class TrazeGUIClient extends BasicGame {
 
 	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
-		g.setDrawMode(0);
 		if(TrazeClient.grid != null) {	
 		for(int x = 0; x < TrazeClient.grid.getGridWidth(); x++) {
 			for(int y = 0; y < TrazeClient.grid.getGridHeight(); y++) {
@@ -46,7 +46,18 @@ public class TrazeGUIClient extends BasicGame {
 
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
-		// TODO Auto-generated method stub
+		if(container.getInput().isKeyPressed(Input.KEY_A)) {
+			
+		}
+		else if(container.getInput().isKeyPressed(Input.KEY_S)) {
+			
+		}
+		else if(container.getInput().isKeyPressed(Input.KEY_D)) {
+			
+		}
+		else if(container.getInput().isKeyPressed(Input.KEY_W)) {
+			
+		}
 		
 	}
 
