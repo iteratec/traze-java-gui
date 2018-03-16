@@ -80,15 +80,13 @@ public class TrazeClient {
 
     public static void setPlayers(String playersString) {
         JSONArray playersJsonArray = new JSONArray(playersString);
+        players = new Player[playersJsonArray.length()];
 
         for (int i = 0; i < playersJsonArray.length(); ++i) {
             JSONObject playerJson = (JSONObject) playersJsonArray.get(i);
             Player player = new Player();
             player.setId((int) playerJson.get("id"));
             player.setName((String) playerJson.get("name"));
-
-            System.out.println("Found Player: " + player.getName());
-
             player.setColor((String) playerJson.get("color"));
             player.setFrags((int) playerJson.get("frags"));
             player.setOwned((int) playerJson.get("owned"));
