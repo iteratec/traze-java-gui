@@ -20,6 +20,7 @@ class BrokerClient {
 
             join("MMAO");
             client.subscribe("traze/1/player/" + generatedClientId);
+            client.subscribe("traze/1/players");
 
 //            client.subscribe("traze/1/players");
 //            client.subscribe("traze/1/ticker");
