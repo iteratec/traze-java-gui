@@ -7,13 +7,12 @@ import org.json.JSONObject;
 class BrokerClient {
 
     private MqttClient client;
-    String generatedClientId;
+    public static String generatedClientId;
     private SimpleMqttCallBack ourCallback = new SimpleMqttCallBack();
 
     BrokerClient() {
         try {
             generatedClientId = MqttClient.generateClientId();
-            System.out.println("ID: " + generatedClientId);
             client = new MqttClient("tcp://traze.iteratec.de:1883", generatedClientId);
             client.setCallback(ourCallback);
             client.connect();
@@ -29,7 +28,7 @@ class BrokerClient {
         }
     }
 
-    public void join(String nickname) {
+    private void join(String nickname) {
         String topic = "traze/1/join";
 
         JSONObject joiningPlayer = new JSONObject("{\"name\": \"" + nickname + "\",\"mqttClientName\": \"" + generatedClientId + "\"}");

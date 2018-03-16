@@ -6,17 +6,14 @@ import iteratec.mircomarcelalex.traze.content.Grid;
 import iteratec.mircomarcelalex.traze.content.Player;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Rectangle;
 
 public class TrazeClient {
 
     private static BrokerClient bc;
     public static Grid grid;
     public static Player[] players;
+    public static String current_course;
 
     public static void main(String[] args) throws SlickException {
         bc = new BrokerClient();
@@ -93,5 +90,13 @@ public class TrazeClient {
         }
     }
 
+    public static void steer(String playerJsonString) {
+        JSONObject player = new JSONObject(playerJsonString);
+        int playerId = (int) player.get("id");
+        String playerToken = player.get("secretUserToken").toString();
+
+        String messageString = " 'course':'" + current_course + "', 'playerToken': '" + playerToken + "' ";
+        String topic = "traze/1/" + playerId + "/steer";
+    }
 
 }
