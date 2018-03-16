@@ -15,8 +15,9 @@ public class TrazeClient {
     public static Player[] players;
     public static String current_course;
 
-    public static void main(String[] args) throws SlickException {
+    public static void main(String[] args) throws SlickException{
         bc = new BrokerClient();
+        TrazeGUIClient.startClient();
     }
 
     public static void setGrid(String gridString) {
