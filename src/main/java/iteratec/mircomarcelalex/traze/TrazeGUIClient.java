@@ -40,6 +40,12 @@ public class TrazeGUIClient extends BasicGame {
         if (TrazeClient.grid != null) {
             for (int x = 0; x < TrazeClient.grid.getGridWidth(); x++) {
                 for (int y = 0; y < TrazeClient.grid.getGridHeight(); y++) {
+                	for(Coordination2D c : TrazeClient.grid.getSpawns()) {
+                		if(c.getX() == x && c.getY() == y) {
+                			g.setColor(new Color(255,255,255,0.85f));
+                			g.fill(new Rectangle(x * GRID_GRAPHIC_WIDTH, 620 - y * GRID_GRAPHIC_HEIGHT, GRID_GRAPHIC_WIDTH, GRID_GRAPHIC_HEIGHT));
+                		}
+                	}
                     g.setColor(GRID_COLOR);
                     g.draw(new Rectangle(x * GRID_GRAPHIC_WIDTH, 620 - y * GRID_GRAPHIC_HEIGHT, GRID_GRAPHIC_WIDTH, GRID_GRAPHIC_HEIGHT));
                 }
