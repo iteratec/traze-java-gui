@@ -6,7 +6,7 @@ import org.json.JSONObject;
 
 class BrokerClient {
 
-    private MqttClient client;
+    private static MqttClient client;
     public static String generatedClientId;
     private SimpleMqttCallBack ourCallback = new SimpleMqttCallBack();
 
@@ -44,5 +44,17 @@ class BrokerClient {
 
     public SimpleMqttCallBack getCallBack() {
         return ourCallback;
+    }
+
+    public static void steer(String messageString, String topic) {
+        System.out.println(">>> " + messageString);
+
+        MqttMessage message = new MqttMessage();
+        message.setPayload(messageString.getBytes());
+        try {
+            client.publish(topic, message);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

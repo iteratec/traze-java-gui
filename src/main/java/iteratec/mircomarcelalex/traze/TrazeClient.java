@@ -14,8 +14,10 @@ public class TrazeClient {
     public static Grid grid;
     public static Player[] players;
     public static String current_course;
+    private static String playerToken;
+    private static int playerId;
 
-    public static void main(String[] args) throws SlickException{
+    public static void main(String[] args) throws SlickException {
         bc = new BrokerClient();
         TrazeGUIClient.startClient();
     }
@@ -91,13 +93,20 @@ public class TrazeClient {
         }
     }
 
-    public static void steer(String playerJsonString) {
+    public static void initPlayer(String playerJsonString) {
         JSONObject player = new JSONObject(playerJsonString);
-        int playerId = (int) player.get("id");
-        String playerToken = player.get("secretUserToken").toString();
+        playerId = (int) player.get("id");
+        System.out.println(" >>> Farbe: " + player.get("color"));
+        playerToken = player.get("secretUserToken").toString();
+        System.out.println("Spieler erfolgreich registriert!");
+    }
 
-        String messageString = " 'course':'" + current_course + "', 'playerToken': '" + playerToken + "' ";
-        String topic = "traze/1/" + playerId + "/steer";
+    public static void steer() {
+        if (playerToken != null && current_course != null) {
+            String messageString = " 'course':'" + current_course + "', 'playerToken': '" + playerToken + "' ";
+            String topic = "traze/1/" + playerId + "/steer";
+            BrokerClient.steer(messageString, topic);
+        }
     }
 
 }
