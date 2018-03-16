@@ -45,7 +45,7 @@ public class TrazeGUIClient extends BasicGame {
                 	for(Coordination2D c : TrazeClient.grid.getSpawns()) {
                 		if(c.getX() == x && c.getY() == y) {
                 			g.setColor(new Color(255,255,255,0.85f));
-                			g.fill(new Rectangle(x * GRID_GRAPHIC_WIDTH, 620 - y * GRID_GRAPHIC_HEIGHT, GRID_GRAPHIC_WIDTH, GRID_GRAPHIC_HEIGHT));
+                			g.fill(new Rectangle(x * GRID_GRAPHIC_WIDTH, WINDOW_HEIGHT - y * GRID_GRAPHIC_HEIGHT, GRID_GRAPHIC_WIDTH, GRID_GRAPHIC_HEIGHT));
                 		}
                 	}
                     g.setColor(GRID_COLOR);
