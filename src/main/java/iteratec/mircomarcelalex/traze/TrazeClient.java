@@ -1,24 +1,24 @@
 package iteratec.mircomarcelalex.traze;
 
+import iteratec.mircomarcelalex.traze.content.Grid;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
-import iteratec.mircomarcelalex.traze.content.Grid;
-
 public class TrazeClient extends BasicGame {
 
-	private static BrokerClient bc;
-	private static Grid grid;
-	
+    private static BrokerClient bc;
+    private static Grid grid;
+
     public TrazeClient(String title) {
         super(title);
     }
 
     public static void main(String[] args) {
-       bc = new BrokerClient();
+        bc = new BrokerClient();
 
 //        try {
 //            AppGameContainer appgc;
@@ -47,8 +47,28 @@ public class TrazeClient extends BasicGame {
 
     }
 
-    public static void setGrid(String grid) {
-    	JSONObject gridJson = new JSONObject(grid);
-    	System.out.println(gridJson + "DSASDA");
+    public static void setGrid(String gridString) {
+        JSONObject gridJson = new JSONObject(gridString);
+        JSONArray tiles = (JSONArray) gridJson.get("tiles");
+
+        System.out.println("parsing beginnt...");
+
+        int height = tiles.length();
+        int width = ((JSONArray) tiles.get(0)).length();
+
+        int[][] map = new int[width][height];
+
+        for (int x = 0; x < width; ++x) {
+            for (int y = 0; y < height; ++y) {
+                map[x][y] = (int) ((JSONArray) tiles.get(x)).get(y);
+            }
+        }
+        System.out.println("hat geklappt " + tiles);
+
+//        int[][] map = (int[][]) gridJson.get("tiles");
+//        Bike[] bikes = (Bike[]) gridJson.get("bikes");
+//        Coordination2D[] spawns = (Coordination2D[]) gridJson.get("spawns");
+//
+//        grid = new Grid(map, bikes, spawns);
     }
 }
