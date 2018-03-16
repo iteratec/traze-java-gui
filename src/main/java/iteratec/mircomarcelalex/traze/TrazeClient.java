@@ -8,7 +8,7 @@ import org.json.JSONObject;
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 
-public class TrazeClient extends BasicGame {
+public class TrazeClient extends BasicGame { // test
 
     private static BrokerClient bc;
     private static Grid grid;
