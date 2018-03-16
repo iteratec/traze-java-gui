@@ -47,8 +47,6 @@ class BrokerClient {
     }
 
     public static void steer(String messageString, String topic) {
-        System.out.println(">>> " + messageString);
-
         MqttMessage message = new MqttMessage();
         message.setPayload(messageString.getBytes());
         try {

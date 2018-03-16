@@ -96,16 +96,15 @@ public class TrazeClient {
     public static void initPlayer(String playerJsonString) {
         JSONObject player = new JSONObject(playerJsonString);
         playerId = (int) player.get("id");
-        System.out.println(" >>> Farbe: " + player.get("color"));
         playerToken = player.get("secretUserToken").toString();
         System.out.println("Spieler erfolgreich registriert!");
+        System.out.println(" >>> Farbe: " + player.get("color"));
     }
 
     public static void steer() {
         if (playerToken != null && current_course != null) {
             String messageString = " {\"course\":\"" + current_course + "\", \"playerToken\": \"" + playerToken + "\" }";
             String topic = "traze/1/" + playerId + "/steer";
-            System.out.println("Topic: " + topic);
             BrokerClient.steer(messageString, topic);
         }
     }
