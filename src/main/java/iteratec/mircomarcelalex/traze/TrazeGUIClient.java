@@ -31,6 +31,7 @@ public class TrazeGUIClient extends BasicGame {
         appgc = new AppGameContainer(new TrazeGUIClient("MMA Traze Client"));
         appgc.setDisplayMode(806, 620, false);
         appgc.start();
+        Logger.getLogger(TrazeGUIClient.class.getName()).setLevel(Level.OFF);
     }
 
     @Override
