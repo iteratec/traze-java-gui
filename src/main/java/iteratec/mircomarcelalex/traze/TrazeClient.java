@@ -1,5 +1,7 @@
 package iteratec.mircomarcelalex.traze;
 
+import iteratec.mircomarcelalex.traze.content.Bike;
+import iteratec.mircomarcelalex.traze.content.Coordination2D;
 import iteratec.mircomarcelalex.traze.content.Grid;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -49,26 +51,57 @@ public class TrazeClient extends BasicGame {
 
     public static void setGrid(String gridString) {
         JSONObject gridJson = new JSONObject(gridString);
-        JSONArray tiles = (JSONArray) gridJson.get("tiles");
+        JSONArray tilesJsonArray = (JSONArray) gridJson.get("tiles");
 
         System.out.println("parsing beginnt...");
 
-        int height = tiles.length();
-        int width = ((JSONArray) tiles.get(0)).length();
+        int height = tilesJsonArray.length();
+        int width = ((JSONArray) tilesJsonArray.get(0)).length();
 
-        int[][] map = new int[width][height];
+        int[][] tiles = new int[width][height];
 
         for (int x = 0; x < width; ++x) {
             for (int y = 0; y < height; ++y) {
-                map[x][y] = (int) ((JSONArray) tiles.get(x)).get(y);
+                tiles[x][y] = (int) ((JSONArray) tilesJsonArray.get(x)).get(y);
             }
         }
-        System.out.println("hat geklappt " + tiles);
 
-//        int[][] map = (int[][]) gridJson.get("tiles");
-//        Bike[] bikes = (Bike[]) gridJson.get("bikes");
-//        Coordination2D[] spawns = (Coordination2D[]) gridJson.get("spawns");
+        System.out.println("gridJson " + gridJson);
+
+        JSONArray bikesJsonArray = (JSONArray) gridJson.get("bikes");
+        Bike[] bikes = new Bike[bikesJsonArray.length()];
+
+        for (int j = 0; j < bikesJsonArray.length(); ++j) {
+            Bike bike;
+            int playerId;
+            Coordination2D currentLocation;
+            String direction;
+            Coordination2D[] trail;
+
+            JSONObject bikeJson = (JSONObject) bikesJsonArray.get(j);
+            playerId = (int) bikeJson.get("playerId");
+
+            int x = (int) ((JSONArray) bikeJson.get("currentLocation")).get(0);
+            int y = (int) ((JSONArray) bikeJson.get("currentLocation")).get(1);
+            currentLocation = new Coordination2D(x, y);
+
+            direction = (String) bikeJson.get("direction");
+            int trailLength = ((JSONArray) bikeJson.get("trail")).length();
+            trail = new Coordination2D[trailLength];
+
+            for (int i = 0; i < trailLength; ++i) {
+                JSONArray trailJson = (JSONArray) ((JSONArray) bikeJson.get("trail")).get(i);
+                trail[i] = new Coordination2D((int) trailJson.get(0), (int) trailJson.get(1));
+            }
+
+            bike = new Bike(playerId, currentLocation, direction, trail);
+            bikes[j] = bike;
+        }
+
+
+//        JSONArrayCoordination2D[] spawns = (Coordination2D[]) gridJson.get("spawns");
 //
-//        grid = new Grid(map, bikes, spawns);
+//        grid = new Grid(tiles, bikesJsonArray, spawns);
+        System.out.println("\n hat geklappt " + bikes);
     }
 }
