@@ -100,7 +100,7 @@ public class TrazeClient {
         JSONObject player = new JSONObject(playerJsonString);
         playerId = (int) player.get("id");
         playerToken = player.get("secretUserToken").toString();
-        System.out.println("Spieler erfolgreich registriert!");
+        System.out.println("Spieler " + player.get("name") + " erfolgreich registriert!");
         System.out.println(" >>> Farbe: " + player.get("color"));
     }
 
