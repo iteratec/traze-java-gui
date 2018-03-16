@@ -2,9 +2,11 @@ package iteratec.mircomarcelalex.traze;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Rectangle;
 
 public class TrazeGUIClient extends BasicGame {
 
@@ -22,8 +24,14 @@ public class TrazeGUIClient extends BasicGame {
 
 	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
-		// TODO Auto-generated method stub
-		
+		if(TrazeClient.grid != null) {
+		for(int x = 0; x < TrazeClient.grid.getGridWidth(); x++) {
+			for(int y = 0; y < TrazeClient.grid.getGridHeight(); y++) {
+				g.setColor(Color.green);
+				g.draw(new Rectangle(x, y, 32, 32));
+			}
+		}
+		}
 	}
 
 	@Override
