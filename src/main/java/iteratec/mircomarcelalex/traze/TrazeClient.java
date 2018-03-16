@@ -86,6 +86,9 @@ public class TrazeClient {
             Player player = new Player();
             player.setId((int) playerJson.get("id"));
             player.setName((String) playerJson.get("name"));
+
+            System.out.println("Found Player: " + player.getName());
+
             player.setColor((String) playerJson.get("color"));
             player.setFrags((int) playerJson.get("frags"));
             player.setOwned((int) playerJson.get("owned"));
@@ -106,6 +109,13 @@ public class TrazeClient {
             String messageString = " {\"course\":\"" + current_course + "\", \"playerToken\": \"" + playerToken + "\" }";
             String topic = "traze/1/" + playerId + "/steer";
             BrokerClient.steer(messageString, topic);
+
+            for (Bike bike : grid.getBikes()) {
+                System.out.println("bike.getPlayerId(): " + bike.getPlayerId());
+                if (bike.getPlayerId() == playerId) {
+                    Brain.calculateNextDirection(current_course, bike.getCurrentLocation());
+                }
+            }
         }
     }
 
