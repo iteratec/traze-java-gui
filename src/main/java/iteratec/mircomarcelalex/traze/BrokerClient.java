@@ -12,10 +12,10 @@ class BrokerClient {
             client.setCallback( new SimpleMqttCallBack() );
             client.connect();
 
-            MqttMessage message = new MqttMessage();
-            message.setPayload("Hello world from Java".getBytes());
-            client.publish("iot_data", message);
-            client.disconnect();
+//            MqttMessage message = new MqttMessage();
+//            message.setPayload("Hello world from Java".getBytes());
+//            client.publish("iot_data", message);
+//            client.disconnect();
 
         } catch (MqttException e) {
             e.printStackTrace();
