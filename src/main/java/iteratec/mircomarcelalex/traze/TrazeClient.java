@@ -100,10 +100,14 @@ public class TrazeClient extends BasicGame {
             bikes[j] = bike;
         }
 
+        JSONArray spawnJsonArray = (JSONArray) gridJson.get("spawns");
+        Coordination2D[] spawns = new Coordination2D[spawnJsonArray.length()];
 
-//        JSONArrayCoordination2D[] spawns = (Coordination2D[]) gridJson.get("spawns");
-//
-//        grid = new Grid(tiles, bikesJsonArray, spawns);
-        System.out.println("\n hat geklappt " + bikes);
+        for (int k = 0; k < spawnJsonArray.length(); ++k) {
+            spawns[k] = new Coordination2D((int) spawnJsonArray.get(0), (int) spawnJsonArray.get(1));
+        }
+
+        grid = new Grid(tiles, bikes, spawns);
+        System.out.println("\n hat geklappt " + grid);
     }
 }
