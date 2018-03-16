@@ -13,6 +13,9 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 
+import iteratec.mircomarcelalex.traze.content.Bike;
+import iteratec.mircomarcelalex.traze.content.Player;
+
 public class TrazeGUIClient extends BasicGame {
 
 	private static AppGameContainer appgc;
@@ -31,7 +34,7 @@ public class TrazeGUIClient extends BasicGame {
     }
 
     @Override
-    public void render(GameContainer container, Graphics g) throws SlickException {
+    public void render(GameContainer container, Graphics g) throws SlickException {    	
         if (TrazeClient.grid != null) {
             for (int x = 0; x < TrazeClient.grid.getGridWidth(); x++) {
                 for (int y = 0; y < TrazeClient.grid.getGridHeight(); y++) {
@@ -39,6 +42,12 @@ public class TrazeGUIClient extends BasicGame {
                     g.draw(new Rectangle(x * GRID_GRAPHIC_WIDTH, y * GRID_GRAPHIC_HEIGHT, GRID_GRAPHIC_WIDTH, GRID_GRAPHIC_HEIGHT));
                 }
             }
+        }
+        
+     	if(TrazeClient.grid != null && TrazeClient.grid.getBikes() != null) { 
+        	for(Bike b : TrazeClient.grid.getBikes()) {
+        		g.draw(new Rectangle(b.getCurrentLocation().getX(), b.getCurrentLocation().getY(), 13f, 10f));
+        	}
         }
     }
 
