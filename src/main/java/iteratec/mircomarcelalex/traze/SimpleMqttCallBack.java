@@ -19,9 +19,10 @@ public class SimpleMqttCallBack implements MqttCallback {
             TrazeClient.steer();
         } else if (topic.equals("traze/1/player/" + BrokerClient.generatedClientId)) {
             TrazeClient.initPlayer(new String(mqttMessage.getPayload()));
-        }else if (topic.equals("traze/1/players" )) {
-            TrazeClient.setPlayers(new String(mqttMessage.getPayload()));
         }
+//        else if (topic.equals("traze/1/players" )) {
+//            TrazeClient.setPlayers(new String(mqttMessage.getPayload()));
+//        }
     }
 
     public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
