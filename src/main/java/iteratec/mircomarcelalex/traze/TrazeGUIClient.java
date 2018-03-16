@@ -41,7 +41,7 @@ public class TrazeGUIClient extends BasicGame {
             for (int x = 0; x < TrazeClient.grid.getGridWidth(); x++) {
                 for (int y = 0; y < TrazeClient.grid.getGridHeight(); y++) {
                     g.setColor(GRID_COLOR);
-                    g.draw(new Rectangle(x * GRID_GRAPHIC_WIDTH, y * GRID_GRAPHIC_HEIGHT, GRID_GRAPHIC_WIDTH, GRID_GRAPHIC_HEIGHT));
+                    g.draw(new Rectangle(x * GRID_GRAPHIC_WIDTH, 620 - y * GRID_GRAPHIC_HEIGHT, GRID_GRAPHIC_WIDTH, GRID_GRAPHIC_HEIGHT));
                 }
             }
         }
@@ -50,9 +50,10 @@ public class TrazeGUIClient extends BasicGame {
         	for(Bike b : TrazeClient.grid.getBikes()) {
         		g.setColor(getColor(b.getPlayerId()));
         		for(Coordination2D c : b.getTrail()) {
-        			g.fill(new Rectangle(c.getX() * GRID_GRAPHIC_WIDTH, c.getY() * GRID_GRAPHIC_HEIGHT, 13f, 10f));
+        			g.fill(new Rectangle(c.getX() * GRID_GRAPHIC_WIDTH, 620 - c.getY() * GRID_GRAPHIC_HEIGHT, 13f, 10f));
         		}
-        		g.fill(new Rectangle(b.getCurrentLocation().getX() * GRID_GRAPHIC_WIDTH , b.getCurrentLocation().getY() * GRID_GRAPHIC_HEIGHT, 13f, 10f));
+        		g.setColor(getColor(b.getPlayerId()));
+        		g.fill(new Rectangle(b.getCurrentLocation().getX() * GRID_GRAPHIC_WIDTH , 620 - b.getCurrentLocation().getY() * GRID_GRAPHIC_HEIGHT, 13f, 10f));
         	}
         }
     }
