@@ -45,31 +45,31 @@ public class TrazeGUIClient extends BasicGame {
                 }
             }
         }
-        
-     	if(TrazeClient.grid != null && TrazeClient.players != null && TrazeClient.grid.getBikes() != null) { 
-        	for(Bike b : TrazeClient.grid.getBikes()) {
-        		Color c = getColor(b.getPlayerId());
-        		c.a = 0.7f;
-        		g.setColor(c);
-        		for(Coordination2D cord : b.getTrail()) {
-        			g.fill(new Rectangle(cord.getX() * GRID_GRAPHIC_WIDTH, WINDOW_HEIGHT - cord.getY() * GRID_GRAPHIC_HEIGHT, 13f, 10f));
-        		}
-        		c = getColor(b.getPlayerId());
-        		g.setColor(c);
-        		Player name = findPlayerByBike(b);
-        		String nameString;
-        		if(name != null) {
-        		nameString = name.getName();	
-        		g.setColor(Color.white);
-        		if(findPlayerByBike(b).getName().length() >= 7) {
-        		nameString = findPlayerByBike(b).getName().substring(0, 8);
-        		}
-        		g.drawString(nameString, b.getCurrentLocation().getX() * GRID_GRAPHIC_WIDTH , WINDOW_HEIGHT - b.getCurrentLocation().getY() * GRID_GRAPHIC_HEIGHT);
-        		}
-          		c = getColor(b.getPlayerId());
-        		g.setColor(c);
-        		g.fill(new Rectangle(b.getCurrentLocation().getX() * GRID_GRAPHIC_WIDTH , WINDOW_HEIGHT - b.getCurrentLocation().getY() * GRID_GRAPHIC_HEIGHT, 13f, 10f));
-        	}
+
+        if (TrazeClient.grid != null && TrazeClient.players != null && TrazeClient.grid.getBikes() != null) {
+            for (Bike b : TrazeClient.grid.getBikes()) {
+                Color c = getColor(b.getPlayerId());
+                c.a = 0.7f;
+                g.setColor(c);
+                for (Coordination2D cord : b.getTrail()) {
+                    g.fill(new Rectangle(cord.getX() * GRID_GRAPHIC_WIDTH, WINDOW_HEIGHT - cord.getY() * GRID_GRAPHIC_HEIGHT, 13f, 10f));
+                }
+                c = getColor(b.getPlayerId());
+                g.setColor(c);
+                Player name = findPlayerByBike(b);
+                String nameString;
+                if (name != null) {
+                    nameString = name.getName();
+                    g.setColor(Color.white);
+                    if (findPlayerByBike(b).getName().length() > 7) {
+                        nameString = findPlayerByBike(b).getName().substring(0, 8);
+                    }
+                    g.drawString(nameString, b.getCurrentLocation().getX() * GRID_GRAPHIC_WIDTH, WINDOW_HEIGHT - b.getCurrentLocation().getY() * GRID_GRAPHIC_HEIGHT);
+                }
+                c = getColor(b.getPlayerId());
+                g.setColor(c);
+                g.fill(new Rectangle(b.getCurrentLocation().getX() * GRID_GRAPHIC_WIDTH, WINDOW_HEIGHT - b.getCurrentLocation().getY() * GRID_GRAPHIC_HEIGHT, 13f, 10f));
+            }
 
         }
     }
@@ -112,7 +112,7 @@ public class TrazeGUIClient extends BasicGame {
 
     @Override
     public void update(GameContainer container, int delta) throws SlickException {
-        String wantedCourse = null;
+        String wantedCourse = TrazeClient.current_course;
 
         if (container.getInput().isKeyPressed(Input.KEY_A)) {
             System.out.println("Pressed A");
@@ -127,7 +127,7 @@ public class TrazeGUIClient extends BasicGame {
             System.out.println("Pressed W");
             wantedCourse = "N";
         }
-            TrazeClient.current_course = wantedCourse;
+        TrazeClient.current_course = wantedCourse;
 //        for (Bike bike : TrazeClient.grid.getBikes()) {
 //            if (bike.getPlayerId() == TrazeClient.playerId) {
 //                Brain.calculateNextDirection(wantedCourse, bike.getCurrentLocation());
