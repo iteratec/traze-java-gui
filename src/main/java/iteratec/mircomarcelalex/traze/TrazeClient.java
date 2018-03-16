@@ -22,17 +22,6 @@ public class TrazeClient {
         bc = new BrokerClient();
     }
 
-    public void render(GameContainer container, Graphics g) throws SlickException {
-        if (grid != null) {
-            for (int x = 0; x < grid.getGridWidth(); x++) {
-                for (int y = 0; y < grid.getGridHeight(); y++) {
-                    g.setColor(Color.green);
-                    g.draw(new Rectangle(x, y, 800 / grid.getGridWidth(), 600 / grid.getGridWidth()));
-                }
-            }
-        }
-    }
-
     public static void setGrid(String gridString) {
         JSONObject gridJson = new JSONObject(gridString);
         JSONArray tilesJsonArray = (JSONArray) gridJson.get("tiles");
@@ -79,7 +68,6 @@ public class TrazeClient {
         }
 
         JSONArray spawnJsonArray = (JSONArray) gridJson.get("spawns");
-        System.out.println("spawnJsonArray: " + spawnJsonArray);
         Coordination2D[] spawns = new Coordination2D[spawnJsonArray.length()];
 
         for (int k = 0; k < spawnJsonArray.length(); ++k) {
@@ -87,7 +75,7 @@ public class TrazeClient {
             spawns[k] = new Coordination2D((int) (currentArray.get(0)), (int) (currentArray.get(1)));
         }
 
-        grid = new Grid(tiles, bikes, spawns);
+        TrazeClient.grid = new Grid(tiles, bikes, spawns);
     }
 
     public static void setPlayers(String playersString) {
