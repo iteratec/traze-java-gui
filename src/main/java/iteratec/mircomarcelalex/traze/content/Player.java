@@ -16,6 +16,9 @@ public class Player {
         this.owned = owned;
     }
 
+    public Player() {
+    }
+
     public int getId() {
         return id;
     }

@@ -16,6 +16,8 @@ public class SimpleMqttCallBack implements MqttCallback {
 
         if (topic.equals("traze/1/grid"))
             TrazeClient.setGrid(new String(mqttMessage.getPayload()));
+        if (topic.equals("traze/1/players"))
+            TrazeClient.setPlayers(new String(mqttMessage.getPayload()));
     }
 
 

@@ -3,6 +3,7 @@ package iteratec.mircomarcelalex.traze;
 import iteratec.mircomarcelalex.traze.content.Bike;
 import iteratec.mircomarcelalex.traze.content.Coordination2D;
 import iteratec.mircomarcelalex.traze.content.Grid;
+import iteratec.mircomarcelalex.traze.content.Player;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.newdawn.slick.*;
@@ -12,6 +13,7 @@ public class TrazeClient extends BasicGame {
 
     private static BrokerClient bc;
     private static Grid grid;
+    private static Player[] players;
     private static AppGameContainer appgc;
 
     public TrazeClient(String title) {
@@ -20,22 +22,22 @@ public class TrazeClient extends BasicGame {
 
     public static void main(String[] args) throws SlickException {
         bc = new BrokerClient();
-        
-       appgc = new AppGameContainer(new TrazeClient("MMA Traze Client"));
-       appgc.setDisplayMode(800, 600, false);
-       appgc.start();
+
+//        appgc = new AppGameContainer(new TrazeClient("MMA Traze Client"));
+//        appgc.setDisplayMode(800, 600, false);
+//        appgc.start();
 
     }
 
     public void render(GameContainer container, Graphics g) throws SlickException {
-    	if(grid != null) {
-        for (int x = 0; x < grid.getGridWidth(); x++) {
-            for (int y = 0; y < grid.getGridHeight(); y++) {
-                g.setColor(Color.green);
-                g.draw(new Rectangle(x, y, 800 / grid.getGridWidth(), 600 / grid.getGridWidth()));
+        if (grid != null) {
+            for (int x = 0; x < grid.getGridWidth(); x++) {
+                for (int y = 0; y < grid.getGridHeight(); y++) {
+                    g.setColor(Color.green);
+                    g.draw(new Rectangle(x, y, 800 / grid.getGridWidth(), 600 / grid.getGridWidth()));
+                }
             }
         }
-    	}
     }
 
     @Override
@@ -52,8 +54,6 @@ public class TrazeClient extends BasicGame {
     public static void setGrid(String gridString) {
         JSONObject gridJson = new JSONObject(gridString);
         JSONArray tilesJsonArray = (JSONArray) gridJson.get("tiles");
-
-        System.out.println("parsing beginnt...");
 
         int height = tilesJsonArray.length();
         int width = ((JSONArray) tilesJsonArray.get(0)).length();
@@ -104,6 +104,21 @@ public class TrazeClient extends BasicGame {
         }
 
         grid = new Grid(tiles, bikes, spawns);
-        System.out.println("\n hat geklappt " + grid);
+    }
+
+    public static void setPlayers(String playersString) {
+        JSONArray playersJsonArray = new JSONArray(playersString);
+        System.out.println(playersJsonArray);
+
+        for (int i = 0; i < playersJsonArray.length(); ++i) {
+            JSONObject playerJson = (JSONObject) playersJsonArray.get(i);
+            Player player = new Player();
+            player.setId((int) playerJson.get("id"));
+            player.setName((String) playerJson.get("name"));
+            player.setColor((String) playerJson.get("color"));
+            player.setFrags((int) playerJson.get("frags"));
+            player.setColor((String) playerJson.get("owned"));
+            players[i] = player;
+        }
     }
 }
