@@ -106,13 +106,14 @@ public class TrazeClient {
         if (playerToken != null && current_course != null) {
             String messageString = " {\"course\":\"" + current_course + "\", \"playerToken\": \"" + playerToken + "\" }";
             String topic = "traze/1/" + playerId + "/steer";
-            BrokerClient.steer(messageString, topic);
 
             for (Bike bike : grid.getBikes()) {
                 if (bike.getPlayerId() == playerId) {
                     Brain.calculateNextDirection(current_course, bike.getCurrentLocation());
                 }
             }
+
+            BrokerClient.steer(messageString, topic);
         }
     }
 
