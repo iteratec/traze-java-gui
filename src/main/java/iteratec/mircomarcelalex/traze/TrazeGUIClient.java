@@ -14,6 +14,7 @@ import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 
 import iteratec.mircomarcelalex.traze.content.Bike;
+import iteratec.mircomarcelalex.traze.content.Coordination2D;
 import iteratec.mircomarcelalex.traze.content.Player;
 
 public class TrazeGUIClient extends BasicGame {
@@ -48,6 +49,9 @@ public class TrazeGUIClient extends BasicGame {
      	if(TrazeClient.grid != null && TrazeClient.players != null && TrazeClient.grid.getBikes() != null) { 
         	for(Bike b : TrazeClient.grid.getBikes()) {
         		g.setColor(getColor(b.getPlayerId()));
+        		for(Coordination2D c : b.getTrail()) {
+        			g.fill(new Rectangle(c.getX() * GRID_GRAPHIC_WIDTH, c.getY() * GRID_GRAPHIC_HEIGHT, 13f, 10f));
+        		}
         		g.fill(new Rectangle(b.getCurrentLocation().getX() * GRID_GRAPHIC_WIDTH , b.getCurrentLocation().getY() * GRID_GRAPHIC_HEIGHT, 13f, 10f));
         	}
         }
