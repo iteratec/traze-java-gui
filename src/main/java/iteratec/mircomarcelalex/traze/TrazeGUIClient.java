@@ -44,9 +44,10 @@ public class TrazeGUIClient extends BasicGame {
             }
         }
         
-     	if(TrazeClient.grid != null && TrazeClient.grid.getBikes() != null) { 
+     	if(TrazeClient.grid != null && TrazeClient.players != null && TrazeClient.grid.getBikes() != null) { 
         	for(Bike b : TrazeClient.grid.getBikes()) {
-        		g.draw(new Rectangle(b.getCurrentLocation().getX(), b.getCurrentLocation().getY(), 13f, 10f));
+        		g.setColor(getColor(b.getPlayerId()));
+        		g.fill(new Rectangle(b.getCurrentLocation().getX() * GRID_GRAPHIC_WIDTH , b.getCurrentLocation().getY() * GRID_GRAPHIC_HEIGHT, 13f, 10f));
         	}
         }
     }
@@ -55,6 +56,22 @@ public class TrazeGUIClient extends BasicGame {
     public void init(GameContainer container) throws SlickException {
         // TODO Auto-generated method stub
 
+    }
+    
+    public Color getColor(int playerId) {
+    	for(Player p : TrazeClient.players) {
+			if(playerId == p.getId()) {
+				return (hex2Rgb(p.getColor()));
+			}
+		}
+		return Color.red;
+    }
+    
+    public static Color hex2Rgb(String colorStr) {
+        return new Color(
+                Integer.valueOf( colorStr.substring( 1, 3 ), 16 ),
+                Integer.valueOf( colorStr.substring( 3, 5 ), 16 ),
+                Integer.valueOf( colorStr.substring( 5, 7 ), 16 ) );
     }
 
     @Override
