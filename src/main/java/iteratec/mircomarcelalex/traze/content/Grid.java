@@ -8,12 +8,12 @@ public class Grid {
 	private Bike[] bikes;
 	private Coordination2D[] spawns;
 	
-	public Grid(int width, int height, int[][] map, Bike[] bikes, Coordination2D[] spawns) {
-		this.gridWidth = width;
-		this.gridHeight = height;
+	public Grid(int[][] map, Bike[] bikes, Coordination2D[] spawns) {
 		this.map = map;
 		this.bikes = bikes;
 		this.spawns = spawns;
+//		this.gridWidth = map[0].length;
+//		this.gridHeight = height;
 	}
 
 	public int getGridWidth() {

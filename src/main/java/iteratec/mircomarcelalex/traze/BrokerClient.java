@@ -5,10 +5,12 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 
 class BrokerClient {
 
+	private SimpleMqttCallBack ourCallback = new SimpleMqttCallBack();
+	
     BrokerClient() {
         try {
             MqttClient client = new MqttClient("tcp://traze.iteratec.de:1883", MqttClient.generateClientId());
-            client.setCallback(new SimpleMqttCallBack());
+            client.setCallback(ourCallback);
             client.connect();
             client.subscribe("traze/1/grid");
             client.subscribe("traze/1/players");
@@ -16,5 +18,9 @@ class BrokerClient {
         } catch (MqttException e) {
             e.printStackTrace();
         }
+    }
+    
+    public SimpleMqttCallBack getCallBack(){
+    	return ourCallback;
     }
 }

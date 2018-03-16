@@ -1,18 +1,24 @@
 package iteratec.mircomarcelalex.traze;
 
+import org.json.JSONObject;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
+import iteratec.mircomarcelalex.traze.content.Grid;
+
 public class TrazeClient extends BasicGame {
 
+	private static BrokerClient bc;
+	private static Grid grid;
+	
     public TrazeClient(String title) {
         super(title);
     }
 
     public static void main(String[] args) {
-        new BrokerClient();
+       bc = new BrokerClient();
 
 //        try {
 //            AppGameContainer appgc;
@@ -41,4 +47,8 @@ public class TrazeClient extends BasicGame {
 
     }
 
+    public static void setGrid(String grid) {
+    	JSONObject gridJson = new JSONObject(grid);
+    	System.out.println(gridJson + "DSASDA");
+    }
 }
