@@ -58,7 +58,7 @@ public class TrazeGUIClient extends BasicGame {
             TrazeClient.current_course = "S";
         } else if (container.getInput().isKeyPressed(Input.KEY_D)) {
             System.out.println("Pressed D");
-            TrazeClient.current_course = "O";
+            TrazeClient.current_course = "E";
         } else if (container.getInput().isKeyPressed(Input.KEY_W)) {
             System.out.println("Pressed W");
             TrazeClient.current_course = "N";

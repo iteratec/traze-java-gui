@@ -103,8 +103,9 @@ public class TrazeClient {
 
     public static void steer() {
         if (playerToken != null && current_course != null) {
-            String messageString = " 'course':'" + current_course + "', 'playerToken': '" + playerToken + "' ";
+            String messageString = " {\"course\":\"" + current_course + "\", \"playerToken\": \"" + playerToken + "\" }";
             String topic = "traze/1/" + playerId + "/steer";
+            System.out.println("Topic: " + topic);
             BrokerClient.steer(messageString, topic);
         }
     }

@@ -18,7 +18,7 @@ class BrokerClient {
             client.connect();
             client.subscribe("traze/1/grid");
 
-            join("Mirco");
+            join("MMAO");
             client.subscribe("traze/1/player/" + generatedClientId);
 
 //            client.subscribe("traze/1/players");
