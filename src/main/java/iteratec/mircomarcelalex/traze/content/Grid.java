@@ -6,11 +6,11 @@ public class Grid {
 
     private int height;
     private int width;
-    private Point[] tiles;
+    private int[][] tiles;
     private Bike[] bikes;
     private Point[] spawns;
 
-    public Grid(int height, int width, Point[] tiles, Bike[] bikes, Point[] spawns) {
+    public Grid(int height, int width, int[][] tiles, Bike[] bikes, Point[] spawns) {
         this.tiles = tiles;
         this.bikes = bikes;
         this.spawns = spawns;
@@ -37,11 +37,11 @@ public class Grid {
         this.height = height;
     }
 
-    public Point[] getTiles() {
+    public int[][] getTiles() {
         return tiles;
     }
 
-    public void setTiles(Point[] tiles) {
+    public void setTiles(int[][] tiles) {
         this.tiles = tiles;
     }
 
