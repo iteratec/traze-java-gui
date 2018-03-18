@@ -92,7 +92,15 @@ public class TrazeGUIClient extends BasicGame {
 
     }
 
-    public Color getColor(int playerId) {
+    private static Color hex2Rgb(String colorStr) {
+        return new Color(
+                Integer.valueOf(colorStr.substring(1, 3), 16),
+                Integer.valueOf(colorStr.substring(3, 5), 16),
+                Integer.valueOf(colorStr.substring(5, 7), 16)
+        );
+    }
+
+    private Color getColor(int playerId) {
         for (Player p : TrazeClient.players) {
             if (p != null) {
                 if (playerId == p.getId()) {
@@ -103,36 +111,28 @@ public class TrazeGUIClient extends BasicGame {
         return Color.red;
     }
 
-    public static Color hex2Rgb(String colorStr) {
-        return new Color(
-                Integer.valueOf(colorStr.substring(1, 3), 16),
-                Integer.valueOf(colorStr.substring(3, 5), 16),
-                Integer.valueOf(colorStr.substring(5, 7), 16)
-        );
-    }
-
     @Override
     public void update(GameContainer container, int delta) throws SlickException {
-        String wantedCourse = TrazeClient.current_course;
-
         if (container.getInput().isKeyPressed(Input.KEY_A)) {
-            wantedCourse = "W";
+            parseKeyInput("W");
         } else if (container.getInput().isKeyPressed(Input.KEY_S)) {
-            wantedCourse = "S";
+            parseKeyInput("S");
         } else if (container.getInput().isKeyPressed(Input.KEY_D)) {
-            wantedCourse = "E";
+            parseKeyInput("E");
         } else if (container.getInput().isKeyPressed(Input.KEY_W)) {
-            wantedCourse = "N";
+            parseKeyInput("N");
         }
-        TrazeClient.current_course = wantedCourse;
-        TrazeClient.steer();
+    }
+
+    private void parseKeyInput(String key) {
+        TrazeClient.current_course = key;
+        TrazeClient.buildSteerMessage();
 //        for (Bike bike : TrazeClient.grid.getBikes()) {
 //            if (bike.getPlayerId() == TrazeClient.playerId) {
 //                Brain.calculateNextDirection(wantedCourse, bike.getCurrentLocation());
 //                break;
 //            }
 //        }
-
     }
 
 }

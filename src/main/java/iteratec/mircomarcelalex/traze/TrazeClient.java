@@ -97,12 +97,11 @@ public class TrazeClient {
         System.out.println(" >>> Farbe: " + player.get("color"));
     }
 
-    static void steer() {
+    static void buildSteerMessage() {
         if (playerToken != null && current_course != null) {
             String messageString = " {\"course\":\"" + current_course + "\", \"playerToken\": \"" + playerToken + "\" }";
             String topic = "traze/1/" + playerId + "/steer";
-            BrokerClient.steer(messageString, topic);
+            BrokerClient.publishSteerMessage(messageString, topic);
         }
     }
-
 }

@@ -9,18 +9,18 @@ class BrokerClient {
 
     private static final String lockFileDirectory = "../../../paho-lock-files";
     private static MqttClient client;
-    public static String generatedClientId;
-    private SimpleMqttCallBack ourCallback = new SimpleMqttCallBack();
+    static String generatedClientId;
 
     BrokerClient() {
         try {
             generatedClientId = MqttClient.generateClientId();
             client = new MqttClient("tcp://traze.iteratec.de:1883", generatedClientId, new MqttDefaultFilePersistence(lockFileDirectory));
+            SimpleMqttCallBack ourCallback = new SimpleMqttCallBack();
             client.setCallback(ourCallback);
             client.connect();
             client.subscribe("traze/1/grid");
 
-            join("Mr C");
+            join();
             client.subscribe("traze/1/player/" + generatedClientId);
             client.subscribe("traze/1/players");
 
@@ -31,7 +31,7 @@ class BrokerClient {
         }
     }
 
-    public static void steer(String messageString, String topic) {
+    static void publishSteerMessage(String messageString, String topic) {
         MqttMessage message = new MqttMessage();
         message.setPayload(messageString.getBytes());
         try {
@@ -42,14 +42,10 @@ class BrokerClient {
         }
     }
 
-    public SimpleMqttCallBack getCallBack() {
-        return ourCallback;
-    }
-
-    private void join(String nickname) {
+    private void join() {
         String topic = "traze/1/join";
 
-        JSONObject joiningPlayer = new JSONObject("{\"name\": \"" + nickname + "\",\"mqttClientName\": \"" + generatedClientId + "\"}");
+        JSONObject joiningPlayer = new JSONObject("{\"name\": \"" + NameGenerator.generateName() + "\",\"mqttClientName\": \"" + generatedClientId + "\"}");
 
         MqttMessage message = new MqttMessage();
         message.setPayload(joiningPlayer.toString().getBytes());
