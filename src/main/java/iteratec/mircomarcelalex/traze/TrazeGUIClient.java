@@ -124,14 +124,8 @@ public class TrazeGUIClient extends BasicGame {
     }
 
     private void parseKeyInput(String key) {
-        TrazeClient.current_course = key;
+        TrazeClient.current_course = Brain.calculateNextDirection(key);
         TrazeClient.buildSteerMessage();
-//        for (Bike bike : TrazeClient.grid.getBikes()) {
-//            if (bike.getPlayerId() == TrazeClient.playerId) {
-//                Brain.calculateNextDirection(wantedCourse, bike.getCurrentLocation());
-//                break;
-//            }
-//        }
     }
 
 }

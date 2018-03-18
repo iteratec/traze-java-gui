@@ -1,8 +1,6 @@
 package iteratec.mircomarcelalex.traze;
 
-import java.awt.*;
-
-public class Brain {
+class Brain {
 
     static int xMax = 62;
     static int yMax = 62;
@@ -12,28 +10,31 @@ public class Brain {
         Brain.yMax = yMax;
     }
 
-    static void calculateNextDirection(String wantedDirection, Point location) {
-        if (wantedDirection != null) {
-            System.out.println("last: " + TrazeClient.current_course + ", want: " + wantedDirection);
-            if (TrazeClient.current_course.equals("N")) {
-                if (wantedDirection.equals("S")) {
-                    TrazeClient.current_course = "E";
-                }
-            } else if (TrazeClient.current_course.equals("E")) {
-                if (wantedDirection.equals("W")) {
-                    TrazeClient.current_course = "N";
-                }
-            } else if (TrazeClient.current_course.equals("S")) {
-                if (wantedDirection.equals("N")) {
-                    TrazeClient.current_course = "E";
-                }
-            } else if (TrazeClient.current_course.equals("W")) {
-                if (wantedDirection.equals("E")) {
-                    TrazeClient.current_course = "N";
-                }
+    static String calculateNextDirection(String wantedDirection) {
+        if (TrazeClient.current_course != null) {
+            switch (TrazeClient.current_course) {
+                case "N":
+                    if (wantedDirection.equals("S")) {
+                        return "E";
+                    }
+                    break;
+                case "E":
+                    if (wantedDirection.equals("W")) {
+                        return "N";
+                    }
+                    break;
+                case "S":
+                    if (wantedDirection.equals("N")) {
+                        return "E";
+                    }
+                    break;
+                case "W":
+                    if (wantedDirection.equals("E")) {
+                        return "N";
+                    }
+                    break;
             }
-
         }
-
+        return wantedDirection;
     }
 }
