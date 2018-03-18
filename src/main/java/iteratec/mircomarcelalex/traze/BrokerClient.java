@@ -2,10 +2,12 @@ package iteratec.mircomarcelalex.traze;
 
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.eclipse.paho.client.mqttv3.persist.MqttDefaultFilePersistence;
 import org.json.JSONObject;
 
 class BrokerClient {
 
+    private static final String lockFileDirectory = "../../../paho-lock-files";
     private static MqttClient client;
     public static String generatedClientId;
     private SimpleMqttCallBack ourCallback = new SimpleMqttCallBack();
@@ -13,7 +15,7 @@ class BrokerClient {
     BrokerClient() {
         try {
             generatedClientId = MqttClient.generateClientId();
-            client = new MqttClient("tcp://traze.iteratec.de:1883", generatedClientId);
+            client = new MqttClient("tcp://traze.iteratec.de:1883", generatedClientId, new MqttDefaultFilePersistence(lockFileDirectory));
             client.setCallback(ourCallback);
             client.connect();
             client.subscribe("traze/1/grid");
