@@ -62,8 +62,8 @@ public class TrazeGUIClient extends BasicGame {
                 if (player != null) {
                     nameString = player.getName();
                     g.setColor(Color.white);
-                    if (nameString.length() > 7) {
-                        nameString = nameString.substring(0, 8);
+                    if (nameString.length() > 15) {
+                        nameString = nameString.substring(0, 16);
                     }
                     g.drawString(nameString, (int) bike.getCurrentLocation().getX() * GRID_GRAPHIC_WIDTH, WINDOW_HEIGHT - (int) bike.getCurrentLocation().getY() * GRID_GRAPHIC_HEIGHT);
                 }
@@ -71,7 +71,6 @@ public class TrazeGUIClient extends BasicGame {
                 g.setColor(c);
                 g.fill(new Rectangle((int) bike.getCurrentLocation().getX() * GRID_GRAPHIC_WIDTH, WINDOW_HEIGHT - (int) bike.getCurrentLocation().getY() * GRID_GRAPHIC_HEIGHT, 13f, 10f));
             }
-
         }
     }
 

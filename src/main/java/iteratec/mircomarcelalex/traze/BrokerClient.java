@@ -45,7 +45,7 @@ class BrokerClient {
     private void join() {
         String topic = "traze/1/join";
 
-        JSONObject joiningPlayer = new JSONObject("{\"name\": \"" + NameGenerator.generateName() + "\",\"mqttClientName\": \"" + generatedClientId + "\"}");
+        JSONObject joiningPlayer = new JSONObject("{\"name\": \"" + NameGenerator.generateHeroName() + "\",\"mqttClientName\": \"" + generatedClientId + "\"}");
 
         MqttMessage message = new MqttMessage();
         message.setPayload(joiningPlayer.toString().getBytes());
