@@ -1,5 +1,6 @@
 package iteratec.mircomarcelalex.traze;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import iteratec.mircomarcelalex.traze.content.Bike;
 import iteratec.mircomarcelalex.traze.content.Coordination2D;
 import iteratec.mircomarcelalex.traze.content.Grid;
@@ -7,6 +8,8 @@ import iteratec.mircomarcelalex.traze.content.Player;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.newdawn.slick.SlickException;
+
+import java.io.IOException;
 
 public class TrazeClient {
 
@@ -16,6 +19,7 @@ public class TrazeClient {
     public static String current_course;
     static String playerToken;
     public static int playerId;
+    private static ObjectMapper objectMapper = new ObjectMapper();
 
     public static void main(String[] args) throws SlickException {
         bc = new BrokerClient();
@@ -79,18 +83,10 @@ public class TrazeClient {
     }
 
     public static void setPlayers(String playersString) {
-        JSONArray playersJsonArray = new JSONArray(playersString);
-        players = new Player[playersJsonArray.length()];
-
-        for (int i = 0; i < playersJsonArray.length(); ++i) {
-            JSONObject playerJson = (JSONObject) playersJsonArray.get(i);
-            Player player = new Player();
-            player.setId((int) playerJson.get("id"));
-            player.setName((String) playerJson.get("name"));
-            player.setColor((String) playerJson.get("color"));
-            player.setFrags((int) playerJson.get("frags"));
-            player.setOwned((int) playerJson.get("owned"));
-            players[i] = player;
+        try {
+            players = objectMapper.readValue(playersString, Player[].class);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

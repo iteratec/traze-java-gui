@@ -115,19 +115,16 @@ public class TrazeGUIClient extends BasicGame {
         String wantedCourse = TrazeClient.current_course;
 
         if (container.getInput().isKeyPressed(Input.KEY_A)) {
-            System.out.println("Pressed A");
             wantedCourse = "W";
         } else if (container.getInput().isKeyPressed(Input.KEY_S)) {
-            System.out.println("Pressed S");
             wantedCourse = "S";
         } else if (container.getInput().isKeyPressed(Input.KEY_D)) {
-            System.out.println("Pressed D");
             wantedCourse = "E";
         } else if (container.getInput().isKeyPressed(Input.KEY_W)) {
-            System.out.println("Pressed W");
             wantedCourse = "N";
         }
         TrazeClient.current_course = wantedCourse;
+        TrazeClient.steer();
 //        for (Bike bike : TrazeClient.grid.getBikes()) {
 //            if (bike.getPlayerId() == TrazeClient.playerId) {
 //                Brain.calculateNextDirection(wantedCourse, bike.getCurrentLocation());

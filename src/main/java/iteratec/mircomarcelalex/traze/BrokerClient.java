@@ -18,7 +18,7 @@ class BrokerClient {
             client.connect();
             client.subscribe("traze/1/grid");
 
-            join("MMAO");
+            join("Mr C");
             client.subscribe("traze/1/player/" + generatedClientId);
             client.subscribe("traze/1/players");
 
@@ -29,14 +29,11 @@ class BrokerClient {
         }
     }
 
-    private void join(String nickname) {
-        String topic = "traze/1/join";
-
-        JSONObject joiningPlayer = new JSONObject("{\"name\": \"" + nickname + "\",\"mqttClientName\": \"" + generatedClientId + "\"}");
-
+    public static void steer(String messageString, String topic) {
         MqttMessage message = new MqttMessage();
-        message.setPayload(joiningPlayer.toString().getBytes());
+        message.setPayload(messageString.getBytes());
         try {
+            System.out.println("publishing: " + messageString);
             client.publish(topic, message);
         } catch (Exception e) {
             e.printStackTrace();
@@ -47,10 +44,15 @@ class BrokerClient {
         return ourCallback;
     }
 
-    public static void steer(String messageString, String topic) {
+    private void join(String nickname) {
+        String topic = "traze/1/join";
+
+        JSONObject joiningPlayer = new JSONObject("{\"name\": \"" + nickname + "\",\"mqttClientName\": \"" + generatedClientId + "\"}");
+
         MqttMessage message = new MqttMessage();
-        message.setPayload(messageString.getBytes());
+        message.setPayload(joiningPlayer.toString().getBytes());
         try {
+            System.out.println("publishing: " + joiningPlayer.toString());
             client.publish(topic, message);
         } catch (Exception e) {
             e.printStackTrace();
