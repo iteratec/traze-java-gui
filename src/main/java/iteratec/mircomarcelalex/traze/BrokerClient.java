@@ -23,9 +23,6 @@ class BrokerClient {
             join();
             client.subscribe("traze/1/player/" + generatedClientId);
             client.subscribe("traze/1/players");
-
-//            client.subscribe("traze/1/players");
-//            client.subscribe("traze/1/ticker");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -42,7 +39,7 @@ class BrokerClient {
         }
     }
 
-    private void join() {
+    static void join() {
         String topic = "traze/1/join";
 
         JSONObject joiningPlayer = new JSONObject("{\"name\": \"" + NameGenerator.generateHeroName() + "\",\"mqttClientName\": \"" + generatedClientId + "\"}");

@@ -84,9 +84,19 @@ public class TrazeClient {
     static void setPlayers(String playersString) {
         try {
             players = objectMapper.readValue(playersString, Player[].class);
+            if (!playerAlive())
+                BrokerClient.join();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static boolean playerAlive() {
+        for (Player player : players) {
+            if (player.getId() == playerId)
+                return true;
+        }
+        return false;
     }
 
     static void initPlayer(String playerJsonString) {
