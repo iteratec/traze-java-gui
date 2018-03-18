@@ -32,8 +32,8 @@ public class TrazeGUIClient extends BasicGame {
     @Override
     public void render(GameContainer container, Graphics g) throws SlickException {
         if (TrazeClient.grid != null) {
-            for (int x = 0; x < TrazeClient.grid.getGridWidth(); x++) {
-                for (int y = 0; y < TrazeClient.grid.getGridHeight(); y++) {
+            for (int x = 0; x < TrazeClient.grid.getWidth(); x++) {
+                for (int y = 0; y < TrazeClient.grid.getHeight(); y++) {
                     for (Coordination2D c : TrazeClient.grid.getSpawns()) {
                         if (c.getX() == x && c.getY() == y) {
                             g.setColor(new Color(255, 255, 255, 0.85f));

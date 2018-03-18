@@ -1,60 +1,63 @@
 package iteratec.mircomarcelalex.traze.content;
 
 public class Grid {
-	
-	private int gridWidth;
-	private int gridHeight;
-	private int[][] map;
-	private Bike[] bikes;
-	private Coordination2D[] spawns;
-	
-	public Grid(int[][] map, Bike[] bikes, Coordination2D[] spawns) {
-		this.map = map;
-		this.bikes = bikes;
-		this.spawns = spawns;
-		this.gridWidth = map[0].length;
-		this.gridHeight = map[1].length;
-	}
 
-	public int getGridWidth() {
-		return gridWidth;
-	}
+    private int height;
+    private int width;
+    private int[][] tiles;
+    private Bike[] bikes;
+    private Coordination2D[] spawns;
 
-	public void setGridWidth(int gridWidth) {
-		this.gridWidth = gridWidth;
-	}
+    public Grid(int height, int width, int[][] tiles, Bike[] bikes, Coordination2D[] spawns) {
+        this.tiles = tiles;
+        this.bikes = bikes;
+        this.spawns = spawns;
+        this.height = height;
+        this.width = width;
+    }
 
-	public int getGridHeight() {
-		return gridHeight;
-	}
+    public Grid() {
+    }
 
-	public void setGridHeight(int gridHeight) {
-		this.gridHeight = gridHeight;
-	}
+    public int getWidth() {
+        return width;
+    }
 
-	public int[][] getMap() {
-		return map;
-	}
+    public void setWidth(int width) {
+        this.width = width;
+    }
 
-	public void setMap(int[][] map) {
-		this.map = map;
-	}
+    public int getHeight() {
+        return height;
+    }
 
-	public Bike[] getBikes() {
-		return bikes;
-	}
+    public void setHeight(int height) {
+        this.height = height;
+    }
 
-	public void setBikes(Bike[] bikes) {
-		this.bikes = bikes;
-	}
+    public int[][] getTiles() {
+        return tiles;
+    }
 
-	public Coordination2D[] getSpawns() {
-		return spawns;
-	}
+    public void setTiles(int[][] tiles) {
+        this.tiles = tiles;
+    }
 
-	public void setSpawns(Coordination2D[] spawns) {
-		this.spawns = spawns;
-	}
+    public Bike[] getBikes() {
+        return bikes;
+    }
 
-	
+    public void setBikes(Bike[] bikes) {
+        this.bikes = bikes;
+    }
+
+    public Coordination2D[] getSpawns() {
+        return spawns;
+    }
+
+    public void setSpawns(Coordination2D[] spawns) {
+        this.spawns = spawns;
+    }
+
+
 }
