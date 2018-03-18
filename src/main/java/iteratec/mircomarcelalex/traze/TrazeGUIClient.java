@@ -1,29 +1,30 @@
 package iteratec.mircomarcelalex.traze;
 
 import iteratec.mircomarcelalex.traze.content.Bike;
-import iteratec.mircomarcelalex.traze.content.Coordination2D;
 import iteratec.mircomarcelalex.traze.content.Player;
 import org.newdawn.slick.*;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
 
+import java.awt.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class TrazeGUIClient extends BasicGame {
 
-    private static AppGameContainer appgc;
     private static final int WINDOW_WIDTH = 806;
     private static final int WINDOW_HEIGHT = 620;
     private static final float GRID_GRAPHIC_WIDTH = 13f;
     private static final float GRID_GRAPHIC_HEIGHT = 10f;
     private static final Color GRID_COLOR = new Color(176, 65, 167, 0.1f);
 
-    public TrazeGUIClient(String title) {
+    private TrazeGUIClient(String title) {
         super(title);
     }
 
-    public static void startClient() throws SlickException {
-        appgc = new AppGameContainer(new TrazeGUIClient("MMA Traze Client"));
+    static void startClient() throws SlickException {
+        AppGameContainer appgc = new AppGameContainer(new TrazeGUIClient("MMA Traze Client"));
         appgc.setDisplayMode(WINDOW_WIDTH, WINDOW_HEIGHT, false);
         appgc.start();
         Logger.getLogger(TrazeGUIClient.class.getName()).setLevel(Level.OFF);
@@ -34,7 +35,7 @@ public class TrazeGUIClient extends BasicGame {
         if (TrazeClient.grid != null) {
             for (int x = 0; x < TrazeClient.grid.getWidth(); x++) {
                 for (int y = 0; y < TrazeClient.grid.getHeight(); y++) {
-                    for (Coordination2D c : TrazeClient.grid.getSpawns()) {
+                    for (Point c : TrazeClient.grid.getSpawns()) {
                         if (c.getX() == x && c.getY() == y) {
                             g.setColor(new Color(255, 255, 255, 0.85f));
                             g.fill(new Rectangle(x * GRID_GRAPHIC_WIDTH, WINDOW_HEIGHT - y * GRID_GRAPHIC_HEIGHT, GRID_GRAPHIC_WIDTH, GRID_GRAPHIC_HEIGHT));
@@ -47,38 +48,38 @@ public class TrazeGUIClient extends BasicGame {
         }
 
         if (TrazeClient.grid != null && TrazeClient.players != null && TrazeClient.grid.getBikes() != null) {
-            for (Bike b : TrazeClient.grid.getBikes()) {
-                Color c = getColor(b.getPlayerId());
+            for (Bike bike : TrazeClient.grid.getBikes()) {
+                Color c = getColor(bike.getPlayerId());
                 c.a = 0.7f;
                 g.setColor(c);
-                for (Coordination2D cord : b.getTrail()) {
-                    g.fill(new Rectangle(cord.getX() * GRID_GRAPHIC_WIDTH, WINDOW_HEIGHT - cord.getY() * GRID_GRAPHIC_HEIGHT, 13f, 10f));
+                for (Point point : bike.getTrail()) {
+                    g.fill(new Rectangle((int) point.getX() * GRID_GRAPHIC_WIDTH, WINDOW_HEIGHT - (int) point.getY() * GRID_GRAPHIC_HEIGHT, 13f, 10f));
                 }
-                c = getColor(b.getPlayerId());
+                c = getColor(bike.getPlayerId());
                 g.setColor(c);
-                Player name = findPlayerByBike(b);
+                Player player = findPlayerByBike(bike);
                 String nameString;
-                if (name != null) {
-                    nameString = name.getName();
+                if (player != null) {
+                    nameString = player.getName();
                     g.setColor(Color.white);
-                    if (findPlayerByBike(b).getName().length() > 7) {
-                        nameString = findPlayerByBike(b).getName().substring(0, 8);
+                    if (nameString.length() > 7) {
+                        nameString = nameString.substring(0, 8);
                     }
-                    g.drawString(nameString, b.getCurrentLocation().getX() * GRID_GRAPHIC_WIDTH, WINDOW_HEIGHT - b.getCurrentLocation().getY() * GRID_GRAPHIC_HEIGHT);
+                    g.drawString(nameString, (int) bike.getCurrentLocation().getX() * GRID_GRAPHIC_WIDTH, WINDOW_HEIGHT - (int) bike.getCurrentLocation().getY() * GRID_GRAPHIC_HEIGHT);
                 }
-                c = getColor(b.getPlayerId());
+                c = getColor(bike.getPlayerId());
                 g.setColor(c);
-                g.fill(new Rectangle(b.getCurrentLocation().getX() * GRID_GRAPHIC_WIDTH, WINDOW_HEIGHT - b.getCurrentLocation().getY() * GRID_GRAPHIC_HEIGHT, 13f, 10f));
+                g.fill(new Rectangle((int) bike.getCurrentLocation().getX() * GRID_GRAPHIC_WIDTH, WINDOW_HEIGHT - (int) bike.getCurrentLocation().getY() * GRID_GRAPHIC_HEIGHT, 13f, 10f));
             }
 
         }
     }
 
-    private Player findPlayerByBike(Bike b) {
-        for (Player p : TrazeClient.players) {
-            if (b != null && p != null) {
-                if (b.getPlayerId() == p.getId()) {
-                    return p;
+    private Player findPlayerByBike(Bike bike) {
+        for (Player player : TrazeClient.players) {
+            if (bike != null && player != null) {
+                if (bike.getPlayerId() == player.getId()) {
+                    return player;
                 }
             }
         }

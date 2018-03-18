@@ -1,6 +1,6 @@
 package iteratec.mircomarcelalex.traze;
 
-import iteratec.mircomarcelalex.traze.content.Coordination2D;
+import java.awt.*;
 
 public class Brain {
 
@@ -12,7 +12,7 @@ public class Brain {
         Brain.yMax = yMax;
     }
 
-    static void calculateNextDirection(String wantedDirection, Coordination2D location) {
+    static void calculateNextDirection(String wantedDirection, Point location) {
         if (wantedDirection != null) {
             System.out.println("last: " + TrazeClient.current_course + ", want: " + wantedDirection);
             if (TrazeClient.current_course.equals("N")) {

@@ -1,13 +1,15 @@
 package iteratec.mircomarcelalex.traze.content;
 
+import java.awt.*;
+
 public class Bike {
 	
 	private int playerId;
-	private Coordination2D currentLocation;
+	private Point currentLocation;
 	private String direction;
-	private Coordination2D[] trail;
-	
-	public Bike(int playerId, Coordination2D currentLocation, String direction, Coordination2D[] trail) {
+	private Point[] trail;
+
+	public Bike(int playerId, Point currentLocation, String direction, Point[] trail) {
 		this.playerId = playerId;
 		this.currentLocation = currentLocation;
 		this.direction = direction;
@@ -20,10 +22,12 @@ public class Bike {
 	public void setPlayerId(int playerId) {
 		this.playerId = playerId;
 	}
-	public Coordination2D getCurrentLocation() {
+
+	public Point getCurrentLocation() {
 		return currentLocation;
 	}
-	public void setCurrentLocation(Coordination2D currentLocation) {
+
+	public void setCurrentLocation(Point currentLocation) {
 		this.currentLocation = currentLocation;
 	}
 	public String getDirection() {
@@ -32,10 +36,12 @@ public class Bike {
 	public void setDirection(String direction) {
 		this.direction = direction;
 	}
-	public Coordination2D[] getTrail() {
+
+	public Point[] getTrail() {
 		return trail;
 	}
-	public void setTrail(Coordination2D[] trail) {
+
+	public void setTrail(Point[] trail) {
 		this.trail = trail;
 	}
 	
