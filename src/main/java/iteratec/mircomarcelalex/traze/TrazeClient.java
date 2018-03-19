@@ -17,9 +17,9 @@ public class TrazeClient {
     static Player[] players;
     static String my_current_course;
     static Point my_current_location;
+    static Point[] my_trail;
     private static String myPlayerToken;
     private static int myPlayerId;
-    private static Point[] my_trail;
     private static ObjectMapper objectMapper = new ObjectMapper();
 
     public static void main(String[] args) throws SlickException {
