@@ -19,6 +19,7 @@ public class TrazeClient {
     static Point my_current_location;
     private static String myPlayerToken;
     private static int myPlayerId;
+    private static Point[] my_trail;
     private static ObjectMapper objectMapper = new ObjectMapper();
 
     public static void main(String[] args) throws SlickException {
@@ -58,10 +59,6 @@ public class TrazeClient {
             int y = (int) ((JSONArray) bikeJson.get("currentLocation")).get(1);
             currentLocation = new Point(x, y);
 
-            if (currentPlayerId == myPlayerId) {
-                my_current_location = currentLocation;
-            }
-
             direction = (String) bikeJson.get("direction");
             int trailLength = ((JSONArray) bikeJson.get("trail")).length();
             trail = new Point[trailLength];
@@ -69,6 +66,11 @@ public class TrazeClient {
             for (int i = 0; i < trailLength; ++i) {
                 JSONArray trailJson = (JSONArray) ((JSONArray) bikeJson.get("trail")).get(i);
                 trail[i] = new Point((int) trailJson.get(0), (int) trailJson.get(1));
+            }
+
+            if (currentPlayerId == myPlayerId) {
+                my_current_location = currentLocation;
+                my_trail = trail;
             }
 
             bike = new Bike(currentPlayerId, currentLocation, direction, trail);
