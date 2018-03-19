@@ -21,6 +21,7 @@ public class TrazeClient {
     private static String myPlayerToken;
     private static int myPlayerId;
     private static ObjectMapper objectMapper = new ObjectMapper();
+    public static float time;
 
     public static void main(String[] args) throws SlickException {
         new BrokerClient();
@@ -104,6 +105,7 @@ public class TrazeClient {
             if (player.getId() == myPlayerId)
                 return true;
         }
+    	time = 0;
         return false;
     }
 

@@ -36,6 +36,7 @@ public class TrazeGUIClient extends BasicGame {
     @Override
     public void render(GameContainer container, Graphics g) throws SlickException {
         if (TrazeClient.grid != null) {
+        	g.drawString("Time alive: "+(int)TrazeClient.time/1000+"sec", 10, 30);
             for (int x = 0; x < TrazeClient.grid.getWidth(); x++) {
                 for (int y = 0; y < TrazeClient.grid.getHeight(); y++) {
                     for (Point c : TrazeClient.grid.getSpawns()) {
@@ -115,6 +116,8 @@ public class TrazeGUIClient extends BasicGame {
 
     @Override
     public void update(GameContainer container, int delta) throws SlickException {
+    	TrazeClient.time += delta;    	
+    	
         if (container.getInput().isKeyPressed(Input.KEY_A)) {
             parseKeyInput("W");
         } else if (container.getInput().isKeyPressed(Input.KEY_S)) {
