@@ -13,11 +13,11 @@ public class SimpleMqttCallBack implements MqttCallback {
 
     public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
         if (topic.equals("traze/1/grid")) {
-            TrazeClient.setGrid(new String(mqttMessage.getPayload()));
+            TrazeClient.updateGrid(new String(mqttMessage.getPayload()));
         } else if (topic.equals("traze/1/player/" + BrokerClient.generatedClientId)) {
             TrazeClient.initPlayer(new String(mqttMessage.getPayload()));
         } else if (topic.equals("traze/1/players")) {
-            TrazeClient.setPlayers(new String(mqttMessage.getPayload()));
+            TrazeClient.updateAllPlayers(new String(mqttMessage.getPayload()));
         }
     }
 

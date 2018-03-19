@@ -15,9 +15,10 @@ public class TrazeClient {
 
     static Grid grid;
     static Player[] players;
-    static String current_course;
-    private static String playerToken;
-    private static int playerId;
+    static String my_current_course;
+    static Point my_current_location;
+    private static String myPlayerToken;
+    private static int myPlayerId;
     private static ObjectMapper objectMapper = new ObjectMapper();
 
     public static void main(String[] args) throws SlickException {
@@ -25,7 +26,7 @@ public class TrazeClient {
         TrazeGUIClient.startClient();
     }
 
-    static void setGrid(String gridString) {
+    static void updateGrid(String gridString) {
         JSONObject gridJson = new JSONObject(gridString);
         JSONArray tilesJsonArray = (JSONArray) gridJson.get("tiles");
 
@@ -45,17 +46,21 @@ public class TrazeClient {
 
         for (int j = 0; j < bikesJsonArray.length(); ++j) {
             Bike bike;
-            int playerId;
+            int currentPlayerId;
             Point currentLocation;
             String direction;
             Point[] trail;
 
             JSONObject bikeJson = (JSONObject) bikesJsonArray.get(j);
-            playerId = (int) bikeJson.get("playerId");
+            currentPlayerId = (int) bikeJson.get("playerId");
 
             int x = (int) ((JSONArray) bikeJson.get("currentLocation")).get(0);
             int y = (int) ((JSONArray) bikeJson.get("currentLocation")).get(1);
             currentLocation = new Point(x, y);
+
+            if (currentPlayerId == myPlayerId) {
+                my_current_location = currentLocation;
+            }
 
             direction = (String) bikeJson.get("direction");
             int trailLength = ((JSONArray) bikeJson.get("trail")).length();
@@ -66,7 +71,7 @@ public class TrazeClient {
                 trail[i] = new Point((int) trailJson.get(0), (int) trailJson.get(1));
             }
 
-            bike = new Bike(playerId, currentLocation, direction, trail);
+            bike = new Bike(currentPlayerId, currentLocation, direction, trail);
             bikes[j] = bike;
         }
 
@@ -79,9 +84,10 @@ public class TrazeClient {
         }
 
         TrazeClient.grid = new Grid(height, width, tiles, bikes, spawns);
+        Brain.calculateNextDirection();
     }
 
-    static void setPlayers(String playersString) {
+    static void updateAllPlayers(String playersString) {
         try {
             players = objectMapper.readValue(playersString, Player[].class);
             if (!playerAlive())
@@ -93,24 +99,32 @@ public class TrazeClient {
 
     private static boolean playerAlive() {
         for (Player player : players) {
-            if (player.getId() == playerId)
+            if (player.getId() == myPlayerId)
                 return true;
         }
         return false;
     }
 
+    static Point getCurrentBikeLocation() {
+        for (Bike bike : grid.getBikes()) {
+            if (bike.getPlayerId() == myPlayerId) {
+                return bike.getCurrentLocation();
+            }
+        }
+        return null;
+    }
+
     static void initPlayer(String playerJsonString) {
         JSONObject player = new JSONObject(playerJsonString);
-        playerId = (int) player.get("id");
-        playerToken = player.get("secretUserToken").toString();
+        myPlayerId = (int) player.get("id");
+        myPlayerToken = player.get("secretUserToken").toString();
         System.out.println("Spieler " + player.get("name") + " erfolgreich registriert!");
-        System.out.println(" >>> Farbe: " + player.get("color"));
     }
 
     static void buildSteerMessage() {
-        if (playerToken != null && current_course != null) {
-            String messageString = " {\"course\":\"" + current_course + "\", \"playerToken\": \"" + playerToken + "\" }";
-            String topic = "traze/1/" + playerId + "/steer";
+        if (myPlayerToken != null && my_current_course != null) {
+            String messageString = " {\"course\":\"" + my_current_course + "\", \"playerToken\": \"" + myPlayerToken + "\" }";
+            String topic = "traze/1/" + myPlayerId + "/steer";
             BrokerClient.publishSteerMessage(messageString, topic);
         }
     }

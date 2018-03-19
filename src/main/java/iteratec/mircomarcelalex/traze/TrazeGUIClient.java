@@ -11,6 +11,9 @@ import java.awt.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static iteratec.mircomarcelalex.traze.TrazeClient.buildSteerMessage;
+import static iteratec.mircomarcelalex.traze.TrazeClient.my_current_course;
+
 public class TrazeGUIClient extends BasicGame {
 
     private static final int WINDOW_WIDTH = 806;
@@ -124,8 +127,8 @@ public class TrazeGUIClient extends BasicGame {
     }
 
     private void parseKeyInput(String key) {
-        TrazeClient.current_course = Brain.calculateNextDirection(key);
-        TrazeClient.buildSteerMessage();
+        my_current_course = Brain.calculateNextDirection(key);
+        buildSteerMessage();
     }
 
 }
