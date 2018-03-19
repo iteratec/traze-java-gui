@@ -4,8 +4,8 @@ import static iteratec.mircomarcelalex.traze.TrazeClient.*;
 
 class Brain {
 
-    static int xMax = 62;
-    static int yMax = 62;
+    static int xMax = 61;
+    static int yMax = 61;
 
     Brain(int xMax, int yMax) {
         Brain.xMax = xMax;
@@ -46,54 +46,35 @@ class Brain {
                 case "N":
                     if (!northIsFree()) {
                         eastOrWest();
-                    }
+                    } else
+                        System.out.println("North is free");
                     break;
                 case "E":
                     if (!eastIsFree()) {
                         northOrSouth();
-                    }
+                    } else
+                        System.out.println("East is free");
                     break;
                 case "S":
                     if (!southIsFree()) {
                         eastOrWest();
-                    }
+                    } else
+                        System.out.println("South is free");
                     break;
                 case "W":
                     if (!westIsFree()) {
                         northOrSouth();
-                    }
+                    } else
+                        System.out.println("West is free");
                     break;
-            }
-
-            if (my_current_location.x == 0 && my_current_course.equals("W")) {
-                if (my_current_location.y < yMax / 2)
-                    my_current_course = "N";
-                else
-                    my_current_course = "S";
-            } else if (my_current_location.x == 61 && my_current_course.equals("E")) {
-                if (my_current_location.y < yMax / 2)
-                    my_current_course = "N";
-                else
-                    my_current_course = "S";
-            }
-            if (my_current_location.y == 0 && my_current_course.equals("S")) {
-                if (my_current_location.x < yMax / 2)
-                    my_current_course = "E";
-                else
-                    my_current_course = "W";
-            } else if (my_current_location.y == 61 && my_current_course.equals("N")) {
-                if (my_current_location.x < yMax / 2)
-                    my_current_course = "E";
-                else
-                    my_current_course = "W";
             }
             TrazeClient.buildSteerMessage();
         }
     }
 
     private static boolean northIsFree() {
-        try {
-            return grid.getTiles()[my_current_location.x][my_current_location.y + 1] == 0;
+        try {// FIXME Server Grid ist nach Norden und Osten um 1 verrutscht
+            return grid.getTiles()[my_current_location.x][my_current_location.y + 1] == 0 && my_current_location.y < yMax;
         } catch (ArrayIndexOutOfBoundsException e) {
             return false;
         }
@@ -108,8 +89,8 @@ class Brain {
     }
 
     private static boolean eastIsFree() {
-        try {
-            return grid.getTiles()[my_current_location.x + 1][my_current_location.y] == 0;
+        try { // FIXME Server Grid ist nach Norden und Osten um 1 verrutscht
+            return grid.getTiles()[my_current_location.x + 1][my_current_location.y] == 0 && my_current_location.x < xMax;
         } catch (ArrayIndexOutOfBoundsException e) {
             return false;
         }
