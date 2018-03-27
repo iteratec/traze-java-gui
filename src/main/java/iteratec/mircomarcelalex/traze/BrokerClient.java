@@ -14,7 +14,7 @@ class BrokerClient {
     BrokerClient() {
         try {
             generatedClientId = MqttClient.generateClientId();
-            client = new MqttClient("tcp://traze.iteratec.de:1883", generatedClientId, new MqttDefaultFilePersistence(lockFileDirectory));
+            client = new MqttClient("tcp://traze.iteratec.de:1883", generatedClientId);//, new MqttDefaultFilePersistence(lockFileDirectory));
             SimpleMqttCallBack ourCallback = new SimpleMqttCallBack();
             client.setCallback(ourCallback);
             client.connect();
@@ -32,7 +32,7 @@ class BrokerClient {
         MqttMessage message = new MqttMessage();
         message.setPayload(messageString.getBytes());
         try {
-            System.out.println("publishing: " + messageString);
+            // System.out.println("publishing: " + messageString);
             client.publish(topic, message);
         } catch (Exception e) {
             e.printStackTrace();
@@ -47,7 +47,7 @@ class BrokerClient {
         MqttMessage message = new MqttMessage();
         message.setPayload(joiningPlayer.toString().getBytes());
         try {
-            System.out.println("publishing: " + joiningPlayer.toString());
+            // System.out.println("publishing: " + joiningPlayer.toString());
             client.publish(topic, message);
         } catch (Exception e) {
             e.printStackTrace();
