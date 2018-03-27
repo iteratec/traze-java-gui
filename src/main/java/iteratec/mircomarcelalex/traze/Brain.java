@@ -105,7 +105,13 @@ class Brain {
     }
 
     private static void eastOrWest() {
-        if (eastIsFree()) {
+        if (eastIsFree() && westIsFree()) {
+            if (my_current_location.x < xMax / 2) {
+                my_current_course = "E";
+            } else {
+                my_current_course = "W";
+            }
+        } else if (eastIsFree()) {
             my_current_course = "E";
         } else if (westIsFree()) {
             my_current_course = "W";
@@ -113,7 +119,13 @@ class Brain {
     }
 
     private static void northOrSouth() {
-        if (northIsFree()) {
+        if (northIsFree() && southIsFree()) {
+            if (my_current_location.y < yMax / 2) {
+                my_current_course = "N";
+            } else {
+                my_current_course = "S";
+            }
+        } else if (northIsFree()) {
             my_current_course = "N";
         } else if (southIsFree()) {
             my_current_course = "S";
