@@ -2,12 +2,14 @@
 Complete gui game client written in java
 
 Traze GUI client based on Java with Slick2D.
-Befor starting the application make sure to set your JVM options to 
 
-```-Djava.library.path=/TrazeClient3000/native/linux``` 
+After cloning the repo build the executable jar file with
+```mvn install```
+To run the jar afterwards use ```java -Djava.library.path=/home/USER/TrazeClient3000/native/linux -jar traze-0.0.1-SNAPSHOT-jar-with-dependencies.jar```
 
-Incase you don't use linux you can edit the path to a different suitable OS.
-You can use:
+Make sure to adjust the path of the native library to the location you cloned the repository and change the OS name in the path to your OS.
+
+You can choose from:
 - ```windows```
 - ```macosx```
 - ```solaris```
