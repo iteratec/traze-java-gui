@@ -20,6 +20,7 @@ public class TrazeGUIClient extends BasicGame {
     private static final int WINDOW_HEIGHT = 620;
     private static final float GRID_GRAPHIC_WIDTH = 13f;
     private static final float GRID_GRAPHIC_HEIGHT = 10f;
+    private static final int Y_OFFSET = 1;
     private static final Color GRID_COLOR = new Color(176, 65, 167, 0.1f);
 
     private TrazeGUIClient(String title) {
@@ -36,17 +37,17 @@ public class TrazeGUIClient extends BasicGame {
     @Override
     public void render(GameContainer container, Graphics g) throws SlickException {
         if (TrazeClient.grid != null) {
-        	g.drawString("Time alive: "+(int)TrazeClient.time/1000+"sec", 10, 30);
+            g.drawString("Time alive: " + (int) TrazeClient.time / 1000 + " sec", 10, 30);
             for (int x = 0; x < TrazeClient.grid.getWidth(); x++) {
                 for (int y = 0; y < TrazeClient.grid.getHeight(); y++) {
                     for (Point c : TrazeClient.grid.getSpawns()) {
                         if (c.getX() == x && c.getY() == y) {
                             g.setColor(new Color(255, 255, 255, 0.85f));
-                            g.fill(new Rectangle(x * GRID_GRAPHIC_WIDTH, WINDOW_HEIGHT - y * GRID_GRAPHIC_HEIGHT, GRID_GRAPHIC_WIDTH, GRID_GRAPHIC_HEIGHT));
+                            g.fill(new Rectangle(x * GRID_GRAPHIC_WIDTH, WINDOW_HEIGHT - (y + Y_OFFSET) * GRID_GRAPHIC_HEIGHT, GRID_GRAPHIC_WIDTH, GRID_GRAPHIC_HEIGHT));
                         }
                     }
                     g.setColor(GRID_COLOR);
-                    g.draw(new Rectangle(x * GRID_GRAPHIC_WIDTH, WINDOW_HEIGHT - y * GRID_GRAPHIC_HEIGHT, GRID_GRAPHIC_WIDTH, GRID_GRAPHIC_HEIGHT));
+                    g.draw(new Rectangle(x * GRID_GRAPHIC_WIDTH, WINDOW_HEIGHT - (y + Y_OFFSET) * GRID_GRAPHIC_HEIGHT, GRID_GRAPHIC_WIDTH, GRID_GRAPHIC_HEIGHT));
                 }
             }
         }
@@ -57,7 +58,7 @@ public class TrazeGUIClient extends BasicGame {
                 c.a = 0.7f;
                 g.setColor(c);
                 for (Point point : bike.getTrail()) {
-                    g.fill(new Rectangle((int) point.getX() * GRID_GRAPHIC_WIDTH, WINDOW_HEIGHT - (int) point.getY() * GRID_GRAPHIC_HEIGHT, 13f, 10f));
+                    g.fill(new Rectangle((int) point.getX() * GRID_GRAPHIC_WIDTH, WINDOW_HEIGHT - (int) (point.getY() + Y_OFFSET) * GRID_GRAPHIC_HEIGHT, 13f, 10f));
                 }
                 c = getColor(bike.getPlayerId());
                 g.setColor(c);
@@ -73,7 +74,7 @@ public class TrazeGUIClient extends BasicGame {
                 }
                 c = getColor(bike.getPlayerId());
                 g.setColor(c);
-                g.fill(new Rectangle((int) bike.getCurrentLocation().getX() * GRID_GRAPHIC_WIDTH, WINDOW_HEIGHT - (int) bike.getCurrentLocation().getY() * GRID_GRAPHIC_HEIGHT, 13f, 10f));
+                g.fill(new Rectangle((int) bike.getCurrentLocation().getX() * GRID_GRAPHIC_WIDTH, WINDOW_HEIGHT - (int) (bike.getCurrentLocation().getY() + Y_OFFSET) * GRID_GRAPHIC_HEIGHT, 13f, 10f));
             }
         }
     }
@@ -116,8 +117,8 @@ public class TrazeGUIClient extends BasicGame {
 
     @Override
     public void update(GameContainer container, int delta) throws SlickException {
-    	TrazeClient.time += delta;    	
-    	
+        TrazeClient.time += delta;
+
         if (container.getInput().isKeyPressed(Input.KEY_A)) {
             parseKeyInput("W");
         } else if (container.getInput().isKeyPressed(Input.KEY_S)) {
