@@ -47,25 +47,25 @@ class Brain {
                     if (!northIsFree()) {
                         eastOrWest();
                     } else
-                        System.out.println("North is free");
+//                        System.out.println("North is free");
                     break;
                 case "E":
                     if (!eastIsFree()) {
                         northOrSouth();
                     } else
-                        System.out.println("East is free");
+//                        System.out.println("East is free");
                     break;
                 case "S":
                     if (!southIsFree()) {
                         eastOrWest();
                     } else
-                        System.out.println("South is free");
+//                        System.out.println("South is free");
                     break;
                 case "W":
                     if (!westIsFree()) {
                         northOrSouth();
                     } else
-                        System.out.println("West is free");
+//                        System.out.println("West is free");
                     break;
             }
             TrazeClient.buildSteerMessage();
@@ -73,7 +73,7 @@ class Brain {
     }
 
     private static boolean northIsFree() {
-        try {// FIXME Server Grid ist nach Norden und Osten um 1 verrutscht
+        try {
             return grid.getTiles()[my_current_location.x][my_current_location.y + 1] == 0 && my_current_location.y < yMax;
         } catch (ArrayIndexOutOfBoundsException e) {
             return false;
@@ -89,7 +89,7 @@ class Brain {
     }
 
     private static boolean eastIsFree() {
-        try { // FIXME Server Grid ist nach Norden und Osten um 1 verrutscht
+        try {
             return grid.getTiles()[my_current_location.x + 1][my_current_location.y] == 0 && my_current_location.x < xMax;
         } catch (ArrayIndexOutOfBoundsException e) {
             return false;
