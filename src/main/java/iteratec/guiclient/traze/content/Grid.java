@@ -1,4 +1,4 @@
-package iteratec.mircomarcelalex.traze.content;
+package iteratec.guiclient.traze.content;
 
 import java.awt.*;
 

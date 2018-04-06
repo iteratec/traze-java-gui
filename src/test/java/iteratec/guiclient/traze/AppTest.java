@@ -1,4 +1,4 @@
-package iteratec.mircomarcelalex.traze;
+package iteratec.guiclient.traze;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

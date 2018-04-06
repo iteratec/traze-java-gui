@@ -1,6 +1,4 @@
-package iteratec.mircomarcelalex.traze;
-
-import static iteratec.mircomarcelalex.traze.TrazeClient.*;
+package iteratec.guiclient.traze;
 
 class Brain {
 
@@ -13,8 +11,8 @@ class Brain {
     }
 
     static String calculateNextDirection(String wantedDirection) {
-        if (my_current_course != null) {
-            switch (my_current_course) {
+        if (TrazeClient.my_current_course != null) {
+            switch (TrazeClient.my_current_course) {
                 case "N":
                     if (wantedDirection.equals("S")) {
                         return "E";
@@ -41,8 +39,8 @@ class Brain {
     }
 
     static void calculateNextDirection() {
-        if (my_current_location != null && my_current_course != null && my_trail != null) {
-            switch (my_current_course) {
+        if (TrazeClient.my_current_location != null && TrazeClient.my_current_course != null && TrazeClient.my_trail != null) {
+            switch (TrazeClient.my_current_course) {
                 case "N":
                     if (!northIsFree()) {
                         eastOrWest();
@@ -74,7 +72,7 @@ class Brain {
 
     private static boolean northIsFree() {
         try {
-            return grid.getTiles()[my_current_location.x][my_current_location.y + 1] == 0 && my_current_location.y < yMax;
+            return TrazeClient.grid.getTiles()[TrazeClient.my_current_location.x][TrazeClient.my_current_location.y + 1] == 0 && TrazeClient.my_current_location.y < yMax;
         } catch (ArrayIndexOutOfBoundsException e) {
             return false;
         }
@@ -82,7 +80,7 @@ class Brain {
 
     private static boolean southIsFree() {
         try {
-            return grid.getTiles()[my_current_location.x][my_current_location.y - 1] == 0;
+            return TrazeClient.grid.getTiles()[TrazeClient.my_current_location.x][TrazeClient.my_current_location.y - 1] == 0;
         } catch (ArrayIndexOutOfBoundsException e) {
             return false;
         }
@@ -90,7 +88,7 @@ class Brain {
 
     private static boolean eastIsFree() {
         try {
-            return grid.getTiles()[my_current_location.x + 1][my_current_location.y] == 0 && my_current_location.x < xMax;
+            return TrazeClient.grid.getTiles()[TrazeClient.my_current_location.x + 1][TrazeClient.my_current_location.y] == 0 && TrazeClient.my_current_location.x < xMax;
         } catch (ArrayIndexOutOfBoundsException e) {
             return false;
         }
@@ -98,7 +96,7 @@ class Brain {
 
     private static boolean westIsFree() {
         try {
-            return grid.getTiles()[my_current_location.x - 1][my_current_location.y] == 0;
+            return TrazeClient.grid.getTiles()[TrazeClient.my_current_location.x - 1][TrazeClient.my_current_location.y] == 0;
         } catch (ArrayIndexOutOfBoundsException e) {
             return false;
         }
@@ -106,29 +104,29 @@ class Brain {
 
     private static void eastOrWest() {
         if (eastIsFree() && westIsFree()) {
-            if (my_current_location.x < xMax / 2) {
-                my_current_course = "E";
+            if (TrazeClient.my_current_location.x < xMax / 2) {
+                TrazeClient.my_current_course = "E";
             } else {
-                my_current_course = "W";
+                TrazeClient.my_current_course = "W";
             }
         } else if (eastIsFree()) {
-            my_current_course = "E";
+            TrazeClient.my_current_course = "E";
         } else if (westIsFree()) {
-            my_current_course = "W";
+            TrazeClient.my_current_course = "W";
         }
     }
 
     private static void northOrSouth() {
         if (northIsFree() && southIsFree()) {
-            if (my_current_location.y < yMax / 2) {
-                my_current_course = "N";
+            if (TrazeClient.my_current_location.y < yMax / 2) {
+                TrazeClient.my_current_course = "N";
             } else {
-                my_current_course = "S";
+                TrazeClient.my_current_course = "S";
             }
         } else if (northIsFree()) {
-            my_current_course = "N";
+            TrazeClient.my_current_course = "N";
         } else if (southIsFree()) {
-            my_current_course = "S";
+            TrazeClient.my_current_course = "S";
         }
     }
 }

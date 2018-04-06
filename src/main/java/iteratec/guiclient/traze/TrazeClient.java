@@ -1,9 +1,9 @@
-package iteratec.mircomarcelalex.traze;
+package iteratec.guiclient.traze;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import iteratec.mircomarcelalex.traze.content.Bike;
-import iteratec.mircomarcelalex.traze.content.Grid;
-import iteratec.mircomarcelalex.traze.content.Player;
+import iteratec.guiclient.traze.content.Player;
+import iteratec.guiclient.traze.content.Bike;
+import iteratec.guiclient.traze.content.Grid;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.newdawn.slick.SlickException;

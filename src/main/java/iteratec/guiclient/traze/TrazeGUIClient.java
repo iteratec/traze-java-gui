@@ -1,7 +1,7 @@
-package iteratec.mircomarcelalex.traze;
+package iteratec.guiclient.traze;
 
-import iteratec.mircomarcelalex.traze.content.Bike;
-import iteratec.mircomarcelalex.traze.content.Player;
+import iteratec.guiclient.traze.content.Bike;
+import iteratec.guiclient.traze.content.Player;
 import org.newdawn.slick.*;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
@@ -10,9 +10,6 @@ import org.newdawn.slick.geom.Rectangle;
 import java.awt.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import static iteratec.mircomarcelalex.traze.TrazeClient.buildSteerMessage;
-import static iteratec.mircomarcelalex.traze.TrazeClient.my_current_course;
 
 public class TrazeGUIClient extends BasicGame {
 
@@ -131,8 +128,8 @@ public class TrazeGUIClient extends BasicGame {
     }
 
     private void parseKeyInput(String key) {
-        my_current_course = Brain.calculateNextDirection(key);
-        buildSteerMessage();
+        TrazeClient.my_current_course = Brain.calculateNextDirection(key);
+        TrazeClient.buildSteerMessage();
     }
 
 }

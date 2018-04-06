@@ -1,4 +1,4 @@
-package iteratec.mircomarcelalex.traze;
+package iteratec.guiclient.traze;
 
 import java.util.Random;
 

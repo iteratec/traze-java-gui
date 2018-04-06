@@ -1,4 +1,4 @@
-package iteratec.mircomarcelalex.traze;
+package iteratec.guiclient.traze;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;

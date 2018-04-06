@@ -1,8 +1,7 @@
-package iteratec.mircomarcelalex.traze;
+package iteratec.guiclient.traze;
 
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
-import org.eclipse.paho.client.mqttv3.persist.MqttDefaultFilePersistence;
 import org.json.JSONObject;
 
 class BrokerClient {
