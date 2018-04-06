@@ -1,5 +1,5 @@
 # traze-java-gui
-Complete gui game client written in java
+Complete gui game client written in java.
 
 Traze GUI client based on Java with Slick2D.
 
