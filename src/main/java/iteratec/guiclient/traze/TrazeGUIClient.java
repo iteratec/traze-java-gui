@@ -37,14 +37,16 @@ public class TrazeGUIClient extends BasicGame {
             g.drawString("Time alive: " + (int) TrazeClient.time / 1000 + " sec", 10, 30);
             for (int x = 0; x < TrazeClient.grid.getWidth(); x++) {
                 for (int y = 0; y < TrazeClient.grid.getHeight(); y++) {
-                    for (Point c : TrazeClient.grid.getSpawns()) {
-                        if (c.getX() == x && c.getY() == y) {
-                            g.setColor(new Color(255, 255, 255, 0.85f));
-                            g.fill(new Rectangle(x * GRID_GRAPHIC_WIDTH, WINDOW_HEIGHT - (y + Y_OFFSET) * GRID_GRAPHIC_HEIGHT, GRID_GRAPHIC_WIDTH, GRID_GRAPHIC_HEIGHT));
+                    if(TrazeClient.grid.getSpawns() != null) {
+                        for (Point c : TrazeClient.grid.getSpawns()) {
+                            if (c.getX() == x && c.getY() == y) {
+                                g.setColor(new Color(255, 255, 255, 0.85f));
+                                g.fill(new Rectangle(x * GRID_GRAPHIC_WIDTH, WINDOW_HEIGHT - (y + Y_OFFSET) * GRID_GRAPHIC_HEIGHT, GRID_GRAPHIC_WIDTH, GRID_GRAPHIC_HEIGHT));
+                            }
                         }
+                        g.setColor(GRID_COLOR);
+                        g.draw(new Rectangle(x * GRID_GRAPHIC_WIDTH, WINDOW_HEIGHT - (y + Y_OFFSET) * GRID_GRAPHIC_HEIGHT, GRID_GRAPHIC_WIDTH, GRID_GRAPHIC_HEIGHT));
                     }
-                    g.setColor(GRID_COLOR);
-                    g.draw(new Rectangle(x * GRID_GRAPHIC_WIDTH, WINDOW_HEIGHT - (y + Y_OFFSET) * GRID_GRAPHIC_HEIGHT, GRID_GRAPHIC_WIDTH, GRID_GRAPHIC_HEIGHT));
                 }
             }
         }
