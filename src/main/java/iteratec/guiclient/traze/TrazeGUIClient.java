@@ -19,6 +19,7 @@ public class TrazeGUIClient extends BasicGame {
     private static final float GRID_GRAPHIC_HEIGHT = 10f;
     private static final int Y_OFFSET = 1;
     private static final Color GRID_COLOR = new Color(176, 65, 167, 0.1f);
+    private static boolean gameHasBeenStarted;
 
     private TrazeGUIClient(String title) {
         super(title);
@@ -34,7 +35,6 @@ public class TrazeGUIClient extends BasicGame {
     @Override
     public void render(GameContainer container, Graphics g) throws SlickException {
         if (TrazeClient.grid != null) {
-            g.drawString("Time alive: " + (int) TrazeClient.time / 1000 + " sec", 10, 30);
             for (int x = 0; x < TrazeClient.grid.getWidth(); x++) {
                 for (int y = 0; y < TrazeClient.grid.getHeight(); y++) {
                     if(TrazeClient.grid.getSpawns() != null) {
@@ -76,6 +76,14 @@ public class TrazeGUIClient extends BasicGame {
                 g.fill(new Rectangle((int) bike.getCurrentLocation().getX() * GRID_GRAPHIC_WIDTH, WINDOW_HEIGHT - (int) (bike.getCurrentLocation().getY() + Y_OFFSET) * GRID_GRAPHIC_HEIGHT, 13f, 10f));
             }
         }
+
+        renderTime(g);
+
+    }
+
+    private void renderTime(Graphics g){
+        g.setColor(Color.white);
+        g.drawString("Time alive: " + (int) TrazeClient.time / 1000 + " sec", 10, 30);
     }
 
     private Player findPlayerByBike(Bike bike) {
@@ -116,7 +124,9 @@ public class TrazeGUIClient extends BasicGame {
 
     @Override
     public void update(GameContainer container, int delta) throws SlickException {
-        TrazeClient.time += delta;
+        if(gameHasBeenStarted) {
+            TrazeClient.time += delta;
+        }
 
         if (container.getInput().isKeyPressed(Input.KEY_A)) {
             parseKeyInput("W");
@@ -132,6 +142,9 @@ public class TrazeGUIClient extends BasicGame {
     private void parseKeyInput(String key) {
         TrazeClient.my_current_course = Brain.calculateNextDirection(key);
         TrazeClient.buildSteerMessage();
+        if(!gameHasBeenStarted){
+            gameHasBeenStarted = true;
+        }
     }
 
 }
